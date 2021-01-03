@@ -482,7 +482,6 @@
       
           <h1 id="Linux下压缩文件"><a href="#Linux下压缩文件" class="headerlink" title="Linux下压缩文件"></a>Linux下压缩文件</h1><p>&emsp;&emsp;之前在压缩文件的时候一直使用tar这个命令，因为一般压缩的时候都是对我们能“看见”的文件进行压缩，没有考虑过那些看不见的文件，即“隐藏”文件。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf abc.tar.gz abc/*   // 压缩</span><br><span class="line">tar zxvf abc.tar.gz         // 解压</span><br></pre></td></tr></table></figure>
-
 <p>&emsp;&emsp;最近在服务器上压缩文件时，需要用到里面的隐藏文件，想当然的进行了上面的压缩方式，解压之后发现找不到隐藏文件。一阵查找资料后才发想，上面的做法只是<strong>压缩指定文件夹下面的非隐藏文件与文件夹</strong>。</p>
 <p>&emsp;&emsp;因此查找资料后发现，对于隐藏和非隐藏文件的压缩方式还有些不同。如果想要对隐藏的文件做处理，需要<strong>显示的指定</strong>出来才可以。我们都知道隐藏的文件或文件夹都是以“.”开头的。所以就需要用到正则表达式来处理了：</p>
           <!--noindex-->
