@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Prim算法&amp;ensp;&amp;ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通。也称为最小生成树（最小支撑树），即保持">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prim算法">
+<meta property="og:url" content="http://yoursite.com/2021/04/11/Prim%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Prim算法&amp;ensp;&amp;ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通。也称为最小生成树（最小支撑树），即保持">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-11T08:17:50.000Z">
+<meta property="article:modified_time" content="2021-04-11T09:43:01.499Z">
+<meta property="article:author" content="silence kxm">
+<meta property="article:tag" content="prim">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/04/11/Prim%E7%AE%97%E6%B3%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Prim算法 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/11/Prim%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/1.jpg">
+      <meta itemprop="name" content="silence kxm">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Prim算法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-04-11 16:17:50 / 修改时间：17:43:01" itemprop="dateCreated datePublished" datetime="2021-04-11T16:17:50+08:00">2021-04-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h2><p>&ensp;&ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说<strong>我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通</strong>。也称为最小生成树（最小支撑树），即保持”连通性”的前提下的最小子图，子图各个边的权重之和最小。</p>
+<a id="more"></a>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h3><p>&ensp;&ensp;我们设定无向图G=(P, E)为连通图，P为G中的所有顶点，E为顶点之间的边。我们要从中筛选出部分边构成最小生成树，使的边权重之和最小。</p>
+<p>我们定义V为已经修好路的顶点，U为还未进行修路的顶点，V中的顶点构成了最小生成树后的子树，U中的点会逐个进入V中，最终生成一个最小生成树。</p>
+<p>1、首先我们将第一个顶点放入V中，并将其从U中删除。</p>
+<p>2、从U中选择一个距离V最近的顶点$u_k$，即从U中选择一个顶点，它距离V中所有点的最短距离，是U中的顶点的最小的。</p>
+<p>3、将$u_k$从U中删除，加入V中。</p>
+<p>4、以此类推，直到U中为空，即得到了最小生成树的权重。</p>
+<h2 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h2><p>&ensp;&ensp;第一种写法，我们首先将第一个顶点加入V中，然后开始尝试m-1次，将剩下的顶点依次纳入V中。重点在于如何求U中距离V最近的顶点，我们这里直接两层循环，遍历U中顶点，计算其与V中所有顶点的最短距离，保存距离最短的U中的顶点的索引。遍历结束，索引对应的U中顶点加入到V中即可。时间复杂度为$O(n^3)$</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prim</span><span class="params">(matrix [][]<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">  m := <span class="built_in">len</span>(matrix)</span><br><span class="line">  V := []<span class="keyword">int</span>&#123;<span class="number">0</span>&#125;</span><br><span class="line">  <span class="keyword">var</span> U []<span class="keyword">int</span></span><br><span class="line">  <span class="keyword">for</span> i := <span class="number">1</span>; i &lt; m; i++ &#123;</span><br><span class="line">    U = <span class="built_in">append</span>(U, i)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> k := <span class="number">0</span>; k &lt; m<span class="number">-1</span>; k++ &#123;</span><br><span class="line">    min := <span class="number">1</span>&lt;&lt;<span class="number">31</span> - <span class="number">1</span></span><br><span class="line">    ind1, ind2 := <span class="number">-1</span>, <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="keyword">range</span> V &#123;</span><br><span class="line">      <span class="keyword">for</span> j := <span class="keyword">range</span> U &#123;</span><br><span class="line">        <span class="keyword">if</span> matrix[V[i]][U[j]] &lt; min &#123;</span><br><span class="line">          min = matrix[V[i]][U[j]]</span><br><span class="line">          ind1, ind2 = i, j</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(V[ind1], U[ind2], min)</span><br><span class="line">    V = <span class="built_in">append</span>(V, U[ind2])</span><br><span class="line">    U = <span class="built_in">append</span>(U[:ind2], U[ind2+<span class="number">1</span>:]...)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">  matrix := [][]<span class="keyword">int</span>&#123;</span><br><span class="line">    &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;,</span><br><span class="line">    &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">128</span>&#125;,</span><br><span class="line">    &#123;<span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">4</span>&#125;,</span><br><span class="line">    &#123;<span class="number">3</span>, <span class="number">128</span>, <span class="number">4</span>, <span class="number">0</span>&#125;,</span><br><span class="line">  &#125;</span><br><span class="line">  prim(matrix)</span><br><span class="line">  fmt.Println()</span><br><span class="line">  prim1(matrix)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&ensp;&ensp;上面那种写法的时间复杂度比较高，我们可以考虑进行下优化。在找距离V最近的顶点时，是存在优化空间的。不需要每次都遍历V和U，我们可以用一个数组记录下U中顶点到V的最短距离。</p>
+<p>1、dis数组的长度为顶点的个数，当V中只有第一个顶点$v_0$，dis中记录了该顶点与U中所有顶点的最近距离（无向图，a-&gt;b = b-&gt;a）。</p>
+<p>2、当V中新增一个顶点$v_1$时，我们可以对dis进行一次更新。若U中存在顶点$u_k$其距离$v_1$的值小于其距离$v_0$的值，我们就可以更新dis中的信息。</p>
+<p>3、直接根据dis中的距离来计算距离V最近顶点即可。</p>
+<p>代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prim1</span><span class="params">(matrix [][]<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	m := <span class="built_in">len</span>(matrix)</span><br><span class="line">	dis := <span class="built_in">make</span>([]<span class="keyword">int</span>, m)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m; i++ &#123;</span><br><span class="line">		dis[i] = matrix[<span class="number">0</span>][i]</span><br><span class="line">	&#125;</span><br><span class="line">	status := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">bool</span>, m)</span><br><span class="line"></span><br><span class="line">	res := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; m<span class="number">-1</span>; i++ &#123; <span class="comment">// 需要找剩余的点</span></span><br><span class="line">		t := <span class="number">-1</span></span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">1</span>; j &lt; m; j++ &#123; <span class="comment">// 每次遍历剩余的所有点</span></span><br><span class="line">			<span class="keyword">if</span> !status[j] &amp;&amp; (t == <span class="number">-1</span> || dis[t] &gt; dis[j]) &#123;</span><br><span class="line">				t = j</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		res += dis[t]</span><br><span class="line">		fmt.Println(i, t, dis[t])</span><br><span class="line">		<span class="keyword">for</span> j := <span class="number">1</span>; j &lt; m; j++ &#123;</span><br><span class="line">			<span class="keyword">if</span> matrix[t][j] &lt; dis[j] &#123;</span><br><span class="line">				dis[j] = matrix[t][j]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		status[t] = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(res)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	matrix := [][]<span class="keyword">int</span>&#123;</span><br><span class="line">		&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;,</span><br><span class="line">		&#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">128</span>&#125;,</span><br><span class="line">		&#123;<span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">4</span>&#125;,</span><br><span class="line">		&#123;<span class="number">3</span>, <span class="number">128</span>, <span class="number">4</span>, <span class="number">0</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">	prim(matrix)</span><br><span class="line">	fmt.Println()</span><br><span class="line">	prim1(matrix)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/prim/" rel="tag"># prim</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/11/Floyd%E7%AE%97%E6%B3%95/" rel="prev" title="Floyd算法">
+      <i class="fa fa-chevron-left"></i> Floyd算法
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prim算法"><span class="nav-number">1.</span> <span class="nav-text">Prim算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">2.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心法"><span class="nav-number">2.1.</span> <span class="nav-text">贪心法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码逻辑"><span class="nav-number">3.</span> <span class="nav-text">代码逻辑</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="silence kxm"
+      src="/images/1.jpg">
+  <p class="site-author-name" itemprop="name">silence kxm</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/silencemao" title="GitHub → https://github.com/silencemao" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://t.me/joinchat/AAAAAE011SnAcV1E5n5dSA" title="Telegram → https://t.me/joinchat/AAAAAE011SnAcV1E5n5dSA" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">silence kxm</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
+  </div>
+
+<div class="powered-by">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        本站访客数:<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">
+        本站访问量<span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
