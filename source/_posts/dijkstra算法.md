@@ -1,5 +1,6 @@
 ---
 title: dijkstra算法
+mathjax: true
 date: 2020-07-05 16:07:53
 categories: 算法
 tags: dijkstra
