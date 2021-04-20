@@ -158,3 +158,26 @@ create table t1
 like t2;
 ```
 
+## 5、删除文件
+
+### 1、删除文件
+
+```shell
+hadoop fs -rm -r /user/hive/warehouse/database/table_name/dt=xxxx/city_code=xxxxx
+
+```
+
+上述命令直接在terminal中执行即可，其实就是常用的linux命令前面加上hadoop fs，还有列出某个表的信息
+
+```shell
+hadoop fs -ls /user/hive/warehouse/database/table_name/dt=xxxx
+```
+
+### 2、删除分区
+
+```shell
+alter table table_name drop if exists partition(dt=xxxx, city_code=xxxx);
+
+```
+
+上述命令需要在hive客户端中执行。
