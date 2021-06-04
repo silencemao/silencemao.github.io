@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,6 +13,13 @@
 <meta name="theme-color" content="#222">
 
 
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
 
 
 
@@ -38,10 +45,6 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -50,25 +53,23 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="mask-icon" href="/images/logo.svg?v=" color="#222">
 
 
 
 
-
-  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -93,14 +94,14 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
+    scheme: 'Gemini',
+    version: '',
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    fancybox: false,
+    tabs: ,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: 'Author'
     },
     algolia: {
@@ -126,6 +127,15 @@
 
 
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '[object Object]', 'auto');
+  ga('send', 'pageview');
+</script>
 
 
 
@@ -180,17 +190,29 @@
         <li class="menu-item menu-item-home">
           <a href="/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+            Categories
           </a>
         </li>
       
         
         <li class="menu-item menu-item-archives">
           <a href="/archives/%20" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             Archives
           </a>
@@ -234,7 +256,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -266,7 +288,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T23:03:06+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -325,7 +359,7 @@
 <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>&ensp;&ensp;假设在中东各个国家都有一定的石油库存，每个国家的库存可能不一样，现在你作为掌管石油的老大，你手中有M吨石油，如何分配石油给这些国家，<strong>让整体的石油分布看上去比较均衡</strong>，你可以分配手中的M吨石油，但是不能在各个国家之间调拨石油。你分配的越好，越不会引起战争。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/06/04/%E8%B5%84%E6%BA%90%E5%9D%87%E5%88%86/#more" rel="contents">
+            <a class="btn" href="/2021/06/04/%E8%B5%84%E6%BA%90%E5%9D%87%E5%88%86/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -381,7 +415,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -413,7 +447,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -449,7 +495,7 @@
           <h2 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h2><p>&ensp;&ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说<strong>我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通</strong>。也称为最小生成树（最小支撑树），即保持”连通性”的前提下的最小子图，子图各个边的权重之和最小。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/04/11/Prim%E7%AE%97%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2021/04/11/Prim%E7%AE%97%E6%B3%95/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -505,7 +551,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -537,7 +583,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -595,7 +653,7 @@
           <h2 id="Floyd-算法"><a href="#Floyd-算法" class="headerlink" title="Floyd 算法"></a>Floyd 算法</h2><p>&ensp;&ensp;Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/04/11/Floyd%E7%AE%97%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2021/04/11/Floyd%E7%AE%97%E6%B3%95/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -651,7 +709,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -683,7 +741,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -743,7 +813,7 @@
 <p>&emsp;&emsp;There are a total of <code>numCourses</code> courses you have to take, labeled from <code>0</code> to <code>numCourses-1</code>.</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2021/01/10/%E6%8E%92%E8%AF%BE%E7%A8%8B/#more" rel="contents">
+            <a class="btn" href="/2021/01/10/%E6%8E%92%E8%AF%BE%E7%A8%8B/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -799,7 +869,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -831,7 +901,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -889,7 +971,7 @@
           <h2 id="延迟接受算法"><a href="#延迟接受算法" class="headerlink" title="延迟接受算法"></a>延迟接受算法</h2><p>&emsp;&emsp;延迟接受算法是一个比较经典的优化算法，也叫做盖尔-沙普利算法，是盖尔和沙普利为了寻找一个稳定<a href="https://baike.baidu.com/item/匹配/6397551" target="_blank" rel="noopener">匹配</a>而设计出的市场机制。从算法的角度来讲，延迟接受就是对当前解不会立即接受，而是暂时的不被拒绝，当迭代次数停止以后，会从手上选择最优的那一个作为最终解。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/07/18/%E5%BB%B6%E8%BF%9F%E6%8E%A5%E5%8F%97%E7%AE%97%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2020/07/18/%E5%BB%B6%E8%BF%9F%E6%8E%A5%E5%8F%97%E7%AE%97%E6%B3%95/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -945,7 +1027,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -977,7 +1059,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -1035,7 +1129,7 @@
           <h2 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h2><p>&emsp;&emsp;中文名又叫迪杰斯特拉算法，是一种单源最短路径算法，用于计算一个节点到其它所有节点的最短路径。通俗的讲就是确定好一个起点之后，计算起点到其它点最短路径。常用于一些路由计算或者路径规划等场景。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/07/05/dijkstra%E7%AE%97%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2020/07/05/dijkstra%E7%AE%97%E6%B3%95/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1091,7 +1185,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1123,7 +1217,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -1181,7 +1287,7 @@
           <h1 id="Hive-SQL日常总结"><a href="#Hive-SQL日常总结" class="headerlink" title="Hive/SQL日常总结"></a>Hive/SQL日常总结</h1><p>&emsp;&emsp;说来惭愧，工作了有一段时间了，才开始接触SQL。自己之前从来没有和SQL打过交道。为了不在工作中拖后腿，自己挤时间把《SQL必知必会》这本书看完了。看完之后虽然对SQL有了基本的认识，但是应用起来还是不太熟练，有时候还需要上网查一查相关资料才用。现在把日常使用中会用到的点记录下来，方便以后应用。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/05/16/Hive-SQL%E6%97%A5%E5%B8%B8%E6%80%BB%E7%BB%93/#more" rel="contents">
+            <a class="btn" href="/2020/05/16/Hive-SQL%E6%97%A5%E5%B8%B8%E6%80%BB%E7%BB%93/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1237,7 +1343,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="silence kxm">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1269,7 +1375,19 @@
             
 
             
+              <span class="post-meta-divider">|</span>
+            
 
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-04T21:13:40+08:00">
+                2021-06-04
+              </time>
             
           </span>
 
@@ -1330,7 +1448,7 @@
 <p>&emsp;&emsp;因此查找资料后发现，对于隐藏和非隐藏文件的压缩方式还有些不同。如果想要对隐藏的文件做处理，需要<strong>显示的指定</strong>出来才可以。我们都知道隐藏的文件或文件夹都是以“.”开头的。所以就需要用到正则表达式来处理了：</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/#more" rel="contents">
+            <a class="btn" href="/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1403,6 +1521,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/%5Bobject%20Object%5D"
+                alt="silence kxm" />
+            
               <p class="site-author-name" itemprop="name">silence kxm</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -1447,6 +1569,22 @@
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/silencemao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://t.me/joinchat/AAAAAE011SnAcV1E5n5dSA" target="_blank" title="Telegram">
+                      
+                        <i class="fa fa-fw fa-telegram"></i>Telegram</a>
+                  </span>
+                
+            </div>
+          
 
           
           
@@ -1475,7 +1613,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-[object Object]"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">silence kxm</span>
 
@@ -1491,7 +1629,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v</div>
 
 
 
@@ -1535,8 +1673,8 @@
 
 
 
-  
 
+  
 
 
 
@@ -1575,28 +1713,35 @@
 
   
   
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v="></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v="></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v="></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v="></script>
 
 
 
   
-  
 
   
 
-  
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script type="text/javascript" src="/js/src/bootstrap.js?v="></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
