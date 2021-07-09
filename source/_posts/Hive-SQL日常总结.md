@@ -111,6 +111,17 @@ Insert overwrite table table_name partition(dt=’t’)
 
 上面是将同一个表中一个分区的写入到另一个分区内。
 
+&ensp;&ensp;直接写入一个分区内，相当于追加到对应的分区内。
+
+```sql
+Insert into table table_name partition(dt=’t’)
+       Select col1, col2, col2,….
+       From table_name
+       Where dt=’t-1’
+```
+
+
+
 **注意**：分区字段要写完整
 
 ​      选择数据时不能使用 select *， 因为select * 会选中所有字段，包括分区字段，但是我们写入的表中分区字段是作为文件夹名字的，      即实际表中没有分区字段，假如我们表中有7个字段（非分区字段），另外还有4个分区字段，我们在select * 的时候会选出11个字段，但是我们写入的表只有7个字段需要被写入，这样的话就会报错。
@@ -181,3 +192,50 @@ alter table table_name drop if exists partition(dt=xxxx, city_code=xxxx);
 ```
 
 上述命令需要在hive客户端中执行。
+
+## 6、时间处理
+
+### 1、转换为时间戳
+
+标准格式是指'2021-06-30 10:10:00'这种格式，即'yyyy-MM-dd HH:mm:ss'，
+
+```sql
+unix_timestamp('2021-06-30 10:10:10')
+```
+
+若时间不是标准格式的，比如 '20210630'这种的情况，也可以使用unix_timestamp来转换，但是需要你传入格式，即告诉这个函数你的时间是什么格式的
+
+```sql
+unix_timestamp('20210630', 'yyyyMMdd')
+```
+
+### 2、时间戳转换为日期
+
+时间戳转换为标准格式/指定格式，需要用到from_unixtime(date, format)，此时的时间是到秒级的，即你的时间戳长度为10位。
+
+```sql
+from_unixtime('1625839005', 'yyyy-MM-dd HH:mm:ss')/from_unixtime('1625839005', 'yyyy-MM-dd')
+```
+
+对于一些时间戳是到毫秒级其长度为13位，因此我们在转换前需要先取其前10位，即**对字符串进行截取指定长度**，这个在mysql和hivesql中是由一些差异的。**在mysql中有left，right两个函数，但是在hive中可以使用substr来做**。
+
+```sql
+from_unixtime((cast(substr('1625839005000', 0, 10) as bigint)), 'yyyy-MM-dd HH:mm:ss')
+```
+
+## 7、分位数
+
+在hivesql中，取分位数还是比较简单，有两个函数可供使用，
+
+```sql
+percentile(col, p)
+```
+
+col为我们要处理的列，但是要求col的值必须都为int，p为0-1的小数，表示分位数，0.3表示3分位数
+
+```sql
+percentile_approx(col, array(0.2, 0.3), 9999)
+```
+
+col也是我们要处理的列，此时该列的值可以为浮点型也可以为整型，后面可以穿入一个array，一次取多个分位数
+
