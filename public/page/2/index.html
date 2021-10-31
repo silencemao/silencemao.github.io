@@ -46,31 +46,27 @@
   };
 </script>
 
-  <meta name="description" content="Linux下压缩文件&amp;emsp;&amp;emsp;之前在压缩文件的时候一直使用tar这个命令，因为一般压缩的时候都是对我们能“看见”的文件进行压缩，没有考虑过那些看不见的文件，即“隐藏”文件。 12tar zcvf abc.tar.gz abc&#x2F;*   &#x2F;&#x2F; 压缩tar zxvf abc.tar.gz         &#x2F;&#x2F; 解压 &amp;emsp;&amp;emsp;最近在服务器上压缩文件时，需要用到里面的隐藏文件，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Linux下压缩隐藏文件">
-<meta property="og:url" content="http://yoursite.com/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="碎月如歌">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="Linux下压缩文件&amp;emsp;&amp;emsp;之前在压缩文件的时候一直使用tar这个命令，因为一般压缩的时候都是对我们能“看见”的文件进行压缩，没有考虑过那些看不见的文件，即“隐藏”文件。 12tar zcvf abc.tar.gz abc&#x2F;*   &#x2F;&#x2F; 压缩tar zxvf abc.tar.gz         &#x2F;&#x2F; 解压 &amp;emsp;&amp;emsp;最近在服务器上压缩文件时，需要用到里面的隐藏文件，">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-03T10:28:53.000Z">
-<meta property="article:modified_time" content="2021-06-04T13:13:40.075Z">
 <meta property="article:author" content="silence kxm">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/">
+<link rel="canonical" href="http://yoursite.com/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome: true,
+    isPost: false
   };
 </script>
 
-  <title>Linux下压缩隐藏文件 | 碎月如歌</title>
+  <title>碎月如歌</title>
   
 
 
@@ -175,10 +171,10 @@
             
 
   <div class="posts-expand">
-      
+        
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -192,7 +188,8 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Linux下压缩隐藏文件
+          
+            <a href="/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Linux下压缩隐藏文件</a>
         </h1>
 
         <div class="post-meta">
@@ -234,50 +231,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Linux下压缩文件"><a href="#Linux下压缩文件" class="headerlink" title="Linux下压缩文件"></a>Linux下压缩文件</h1><p>&emsp;&emsp;之前在压缩文件的时候一直使用tar这个命令，因为一般压缩的时候都是对我们能“看见”的文件进行压缩，没有考虑过那些看不见的文件，即“隐藏”文件。</p>
+          <h1 id="Linux下压缩文件"><a href="#Linux下压缩文件" class="headerlink" title="Linux下压缩文件"></a>Linux下压缩文件</h1><p>&emsp;&emsp;之前在压缩文件的时候一直使用tar这个命令，因为一般压缩的时候都是对我们能“看见”的文件进行压缩，没有考虑过那些看不见的文件，即“隐藏”文件。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf abc.tar.gz abc/*   // 压缩</span><br><span class="line">tar zxvf abc.tar.gz         // 解压</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;最近在服务器上压缩文件时，需要用到里面的隐藏文件，想当然的进行了上面的压缩方式，解压之后发现找不到隐藏文件。一阵查找资料后才发想，上面的做法只是<strong>压缩指定文件夹下面的非隐藏文件与文件夹</strong>。</p>
 <p>&emsp;&emsp;因此查找资料后发现，对于隐藏和非隐藏文件的压缩方式还有些不同。如果想要对隐藏的文件做处理，需要<strong>显示的指定</strong>出来才可以。我们都知道隐藏的文件或文件夹都是以“.”开头的。所以就需要用到正则表达式来处理了：</p>
-<a id="more"></a>
-<h2 id="压缩非隐藏文件"><a href="#压缩非隐藏文件" class="headerlink" title="压缩非隐藏文件"></a>压缩非隐藏文件</h2><p>&emsp;&emsp;注意只压缩非隐藏文件，不包括文件夹的话是：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf abc.tar.gz *.*   // 压缩当前文件夹下非隐藏文件不包括文件夹</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;压缩所有的非隐藏文件，包括文件夹：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf abc.tar.gz *</span><br></pre></td></tr></table></figure>
-<h2 id="压缩隐藏文件"><a href="#压缩隐藏文件" class="headerlink" title="压缩隐藏文件"></a>压缩隐藏文件</h2><p>&emsp;&emsp;如果要压缩隐藏文件的话，要显示的指示出来</p>
-<p>&emsp;&emsp;压缩当前文件下的隐藏文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf abc.tar.gz .[!.]*   // 只压缩当前文件夹下隐藏文件排除两个隐藏文件夹"."和“..”</span><br></pre></td></tr></table></figure>
-<p>上面的.[!.]其实就是正则表达式，表示第一个字符是“.”，第二个字符不是”.”，第三个以及后面可以是任意字符。</p>
-<p>&emsp;&emsp;压缩当前文件夹下的所有文件夹以及隐藏的文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zcvf abc.tar.gz .[!.]* *  // 压缩当前文件夹下所有文件和目录包括隐藏文件</span><br></pre></td></tr></table></figure>
-<p>这条命令比上一条命令多了一个*，表示当前文件夹下的所有文件以及文件夹。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/03/Linux%E4%B8%8B%E5%8E%8B%E7%BC%A9%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
     
     
     
-
       <footer class="post-footer">
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item"></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/16/Hive-SQL%E6%97%A5%E5%B8%B8%E6%80%BB%E7%BB%93/" rel="next" title="Hive/SQL日常总结">
-      Hive/SQL日常总结 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
 
   </div>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
@@ -328,7 +314,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux下压缩文件"><span class="nav-number">1.</span> <span class="nav-text">Linux下压缩文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩非隐藏文件"><span class="nav-number">1.1.</span> <span class="nav-text">压缩非隐藏文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩隐藏文件"><span class="nav-number">1.2.</span> <span class="nav-text">压缩隐藏文件</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
