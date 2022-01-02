@@ -100,11 +100,20 @@ math:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+plugins:
+  - markdown-it-katex
+  - markdown-it-abbr
+  - markdown-it-footnote
+  - markdown-it-ins
+  - markdown-it-sub
+  - markdown-it-sup
+
 theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/silencemao/silencemao.github.io.git
+  ## repo: https://github.com/silencemao/silencemao.github.io.git
+  repo: git@github.com:silencemao/silencemao.github.io.git
   branch: master
