@@ -1,439 +1,407 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-
-<script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://yoursite.com').hostname,
-    root: '/',
-    scheme: 'Gemini',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
-
-  <meta name="description" content="工作经验总结为什么要写这个总结&amp;ensp;&amp;ensp;自己工作以来，前期的成长还是比较快的，可以快速的学习技术，业务知识，与人沟通的能力，但是也有几点没有学好，比如：总结的能力，展示汇报的能力，以及表达自己观点的能力…这几点自身感觉是没有明显的提升。可能与我自身的性格、想法有关，仿佛自己一直在觉着只要写好代码，做好工作就行了，最开始还觉着很潇洒，慢慢觉着这样并不好，一直停留在固有的思维层面，这是比">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="silence kxm">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="工作经验总结 为什么要写这个总结   自己工作以来，前期的成长还是比较快的，可以快速的学习技术，业务知识，与人沟通的能力，但是也有几点没有学好，比如：总结的能力，展示汇报的能力，以及表达自己观点的能力...这几点自身感觉是没有明显的提升。可能与我自身的性格、想法有关，仿佛自己一直在觉着只要写好代码，做好工作就行了，最开始还觉着很潇洒，慢慢觉着这样并不好，一直停留在固有的思维层面，这是比较可怕的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="工作心得总结">
 <meta property="og:url" content="http://yoursite.com/2021/07/10/%E5%B7%A5%E4%BD%9C%E5%BF%83%E5%BE%97%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="工作经验总结为什么要写这个总结&amp;ensp;&amp;ensp;自己工作以来，前期的成长还是比较快的，可以快速的学习技术，业务知识，与人沟通的能力，但是也有几点没有学好，比如：总结的能力，展示汇报的能力，以及表达自己观点的能力…这几点自身感觉是没有明显的提升。可能与我自身的性格、想法有关，仿佛自己一直在觉着只要写好代码，做好工作就行了，最开始还觉着很潇洒，慢慢觉着这样并不好，一直停留在固有的思维层面，这是比">
+<meta property="og:description" content="工作经验总结 为什么要写这个总结   自己工作以来，前期的成长还是比较快的，可以快速的学习技术，业务知识，与人沟通的能力，但是也有几点没有学好，比如：总结的能力，展示汇报的能力，以及表达自己观点的能力...这几点自身感觉是没有明显的提升。可能与我自身的性格、想法有关，仿佛自己一直在觉着只要写好代码，做好工作就行了，最开始还觉着很潇洒，慢慢觉着这样并不好，一直停留在固有的思维层面，这是比较可怕的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-07-10T02:52:40.000Z">
 <meta property="article:modified_time" content="2021-07-10T04:21:20.657Z">
 <meta property="article:author" content="silence kxm">
 <meta property="article:tag" content="经验总结">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>工作心得总结 - 碎月如歌</title>
 
-<link rel="canonical" href="http://yoursite.com/2021/07/10/%E5%B7%A5%E4%BD%9C%E5%BF%83%E5%BE%97%E6%80%BB%E7%BB%93/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
 
-  <title>工作心得总结 | 碎月如歌</title>
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
   
 
 
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
+<link  rel="stylesheet" href="/css/main.css" />
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+<!-- 自定义样式保持在最底部 -->
 
-</head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">碎月如歌</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-</div>
-
-
-<nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-
 </nav>
-</div>
-    </header>
 
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content">
-            
-
-  <div class="posts-expand">
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/10/%E5%B7%A5%E4%BD%9C%E5%BF%83%E5%BE%97%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/1.jpg">
-      <meta itemprop="name" content="silence kxm">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="碎月如歌">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          工作心得总结
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="工作心得总结">
               
+            </span>
 
-              <time title="创建时间：2021-07-10 10:52:40 / 修改时间：12:21:20" itemprop="dateCreated datePublished" datetime="2021-07-10T10:52:40+08:00">2021-07-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%80%BB%E7%BB%93/" itemprop="url" rel="index">
-                    <span itemprop="name">总结</span>
-                  </a>
-                </span>
-            </span>
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-10 10:52" pubdate>
+        2021年7月10日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      812 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
 
           
-
         </div>
-      </header>
+      </div>
+    </div>
+  </header>
 
+  <main>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
-        <h2 id="工作经验总结"><a href="#工作经验总结" class="headerlink" title="工作经验总结"></a>工作经验总结</h2><h3 id="为什么要写这个总结"><a href="#为什么要写这个总结" class="headerlink" title="为什么要写这个总结"></a>为什么要写这个总结</h3><p>&ensp;&ensp;自己工作以来，前期的成长还是比较快的，可以快速的学习技术，业务知识，与人沟通的能力，但是也有几点没有学好，比如：总结的能力，展示汇报的能力，以及表达自己观点的能力…这几点自身感觉是没有明显的提升。可能与我自身的性格、想法有关，仿佛自己一直在觉着只要写好代码，做好工作就行了，最开始还觉着很潇洒，慢慢觉着这样并不好，<strong>一直停留在固有的思维层面，这是比较可怕的</strong>。</p>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">工作心得总结</h1>
+            
+            <div class="markdown-body">
+              <h2 id="工作经验总结">工作经验总结</h2>
+<h3 id="为什么要写这个总结">为什么要写这个总结</h3>
+<p>  自己工作以来，前期的成长还是比较快的，可以快速的学习技术，业务知识，与人沟通的能力，但是也有几点没有学好，比如：总结的能力，展示汇报的能力，以及表达自己观点的能力...这几点自身感觉是没有明显的提升。可能与我自身的性格、想法有关，仿佛自己一直在觉着只要写好代码，做好工作就行了，最开始还觉着很潇洒，慢慢觉着这样并不好，<strong>一直停留在固有的思维层面，这是比较可怕的</strong>。</p>
 <span id="more"></span>
-<p>&ensp;&ensp;曾经有人对我说，要想成长，要学会适当的跳出当前的层级去思考问题，去考虑更高一点层级的问题，格局要大。说实话我第一次听到这样的话时，感觉有点虚、假，甚至有些pua的意味。可是转念一想，并不是完全没有道理，假如我们一直按照自己的固有思维去考虑问题，我们一直停留在一个水平面。当别人给我们指点时，我们会有恍然大悟的感觉，如果此时我们能反思为什么别人会这样思考，为什么他能想到自己没有想到的一点，如果能得到别人这样思考的原因，我们也就在慢慢向其靠近。</p>
-<p>&ensp;&ensp;工作了两年时间之后，发现自己的成长的确越来越慢，似乎有一点停滞。有时候仿佛被忙碌蒙蔽了双眼，曾经有一段时间特别忙，特别累，但是却在做着重复性的工作，好像一直都没有成长。当忙碌的节奏停了下来，回头一看才发现自己这一段时间只是忙碌，却收获甚少。而身处工作中，忙碌是必不可少的，可是我们要如何在忙碌中成长呢，那就是要不断的总结，也就是我想写这篇博客的原因。不断的把工作中的想法、心得记录下来，督促自己。</p>
-<h3 id="总结ing…"><a href="#总结ing…" class="headerlink" title="总结ing…."></a>总结ing….</h3><p>1、处理数据时要考虑数据的完整性、正确性，处理完成之后要记得校验。</p>
+<p>  曾经有人对我说，要想成长，要学会适当的跳出当前的层级去思考问题，去考虑更高一点层级的问题，格局要大。说实话我第一次听到这样的话时，感觉有点虚、假，甚至有些pua的意味。可是转念一想，并不是完全没有道理，假如我们一直按照自己的固有思维去考虑问题，我们一直停留在一个水平面。当别人给我们指点时，我们会有恍然大悟的感觉，如果此时我们能反思为什么别人会这样思考，为什么他能想到自己没有想到的一点，如果能得到别人这样思考的原因，我们也就在慢慢向其靠近。</p>
+<p>  工作了两年时间之后，发现自己的成长的确越来越慢，似乎有一点停滞。有时候仿佛被忙碌蒙蔽了双眼，曾经有一段时间特别忙，特别累，但是却在做着重复性的工作，好像一直都没有成长。当忙碌的节奏停了下来，回头一看才发现自己这一段时间只是忙碌，却收获甚少。而身处工作中，忙碌是必不可少的，可是我们要如何在忙碌中成长呢，那就是要不断的总结，也就是我想写这篇博客的原因。不断的把工作中的想法、心得记录下来，督促自己。</p>
+<h3 id="总结ing....">总结ing....</h3>
+<p>1、处理数据时要考虑数据的完整性、正确性，处理完成之后要记得校验。</p>
 <p>2、若要通过做图反应自己产出的数据，要考虑受众范围，比如坐标轴的解释。若数据范围跨度比较大，不能很好的展示细节，是否可以滤除一些异常值，只展示部分范围，把细节展示出来。</p>
 <p>3、与人沟通时，先假设对方的出发点是对我们好，这样二者的立场会先一致，不容易引起矛盾，若不合适，再表达自己的观点也不迟。</p>
-<p>….</p>
-<p>Wo wo wo </p>
-<h3 id="共勉"><a href="#共勉" class="headerlink" title="共勉"></a>共勉</h3>
-    </div>
+<p>....</p>
+<p>Wo wo wo</p>
+<h3 id="共勉">共勉</h3>
 
-    
-    
-    
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%80%BB%E7%BB%93/">总结</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">经验总结</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/20/Spark-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spark-使用总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/04/%E8%B5%84%E6%BA%90%E5%9D%87%E5%88%86/">
+                        <span class="hidden-mobile">资源均分</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" rel="tag"># 经验总结</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2021/06/04/%E8%B5%84%E6%BA%90%E5%9D%87%E5%88%86/" rel="prev" title="资源均分">
-      <i class="fa fa-chevron-left"></i> 资源均分
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/07/20/Spark-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/" rel="next" title="Spark-使用总结">
-      Spark-使用总结 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+            
+          </article>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">工作经验总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E8%BF%99%E4%B8%AA%E6%80%BB%E7%BB%93"><span class="nav-number">1.1.</span> <span class="nav-text">为什么要写这个总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93ing%E2%80%A6"><span class="nav-number">1.2.</span> <span class="nav-text">总结ing….</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E5%8B%89"><span class="nav-number">1.3.</span> <span class="nav-text">共勉</span></a></li></ol></li></ol></div>
       </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="silence kxm"
-      src="/images/1.jpg">
-  <p class="site-author-name" itemprop="name">silence kxm</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">11</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
-        <span class="site-state-item-name">标签</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/silencemao" title="GitHub → https://github.com/silencemao" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://t.me/joinchat/AAAAAE011SnAcV1E5n5dSA" title="Telegram → https://t.me/joinchat/AAAAAE011SnAcV1E5n5dSA" rel="noopener" target="_blank"><i class="fa fa-fw fa-telegram"></i>Telegram</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">silence kxm</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.4.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.7.0
-  </div>
-
-<div class="powered-by">
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <i class="fa fa-user-md"></i>
-    <span id="busuanzi_container_site_uv">
-        本站访客数:<span id="busuanzi_value_site_uv"></span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span id="busuanzi_container_site_pv">
-        本站访问量<span id="busuanzi_value_site_pv"></span>
-    </span>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
-        
-
-
-
-
-
-
-
-
       </div>
-    </footer>
+    
   </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
+  
+</footer>
 
 
-<script src="/js/schemes/pisces.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
-<script src="/js/next-boot.js"></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
@@ -441,23 +409,52 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
   
 
-  
 
-  
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
 
 </body>
 </html>
