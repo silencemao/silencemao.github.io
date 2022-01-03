@@ -108,7 +108,7 @@ plugins:
   - markdown-it-sub
   - markdown-it-sup
 
-theme: next
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
