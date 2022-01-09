@@ -16,24 +16,23 @@
   <meta name="author" content="silence kxm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="模拟退火算法   模拟退火算法是上世纪80年代产生的优化算法，应用于在较大空间中寻找问题的最优解，也是解决TSP问题的一大利器。模拟退火是物质从无序（高温）逐渐趋向（降温）于有序（低温&#x2F;恒温）的过程。因此在模拟退火算法优化的过程中，从始至终是有一个温度贯穿其中的。那温度在优化过程中起到的作用是什么呢？">
+    <meta name="description" content="决策树 决策树三要素  特征选择 决策树生成 决策树剪枝  预剪枝 限制树的深度，叶子节点个数，叶子节点样本数，信息增益等 后剪枝 正则化   ID3   ID3是根据信息增益来选择特征，将数据划分成多份，构成决策树。 信息增益   信息增益是什么呢？划分数据前后 数据中“信息量”的 变化，通常选择信息增益最大的特征作为当前划分的依据。 信息熵   如何衡量“信息量”呢？这里引入熵的概念，熵表示信">
 <meta property="og:type" content="article">
-<meta property="og:title" content="模拟退火算法">
-<meta property="og:url" content="http://yoursite.com/2021/10/30/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:title" content="决策树">
+<meta property="og:url" content="http://yoursite.com/2022/01/03/%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="模拟退火算法   模拟退火算法是上世纪80年代产生的优化算法，应用于在较大空间中寻找问题的最优解，也是解决TSP问题的一大利器。模拟退火是物质从无序（高温）逐渐趋向（降温）于有序（低温&#x2F;恒温）的过程。因此在模拟退火算法优化的过程中，从始至终是有一个温度贯穿其中的。那温度在优化过程中起到的作用是什么呢？">
+<meta property="og:description" content="决策树 决策树三要素  特征选择 决策树生成 决策树剪枝  预剪枝 限制树的深度，叶子节点个数，叶子节点样本数，信息增益等 后剪枝 正则化   ID3   ID3是根据信息增益来选择特征，将数据划分成多份，构成决策树。 信息增益   信息增益是什么呢？划分数据前后 数据中“信息量”的 变化，通常选择信息增益最大的特征作为当前划分的依据。 信息熵   如何衡量“信息量”呢？这里引入熵的概念，熵表示信">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/sa.png">
-<meta property="og:image" content="http://yoursite.com/images/exp.gif">
-<meta property="article:published_time" content="2021-10-30T05:59:35.000Z">
-<meta property="article:modified_time" content="2022-01-03T06:03:00.925Z">
+<meta property="og:image" content="http://yoursite.com/images/entropy.png">
+<meta property="article:published_time" content="2022-01-03T14:53:43.000Z">
+<meta property="article:modified_time" content="2022-01-09T13:56:59.826Z">
 <meta property="article:author" content="silence kxm">
-<meta property="article:tag" content="模拟退火">
+<meta property="article:tag" content="树模型">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/images/sa.png">
+<meta name="twitter:image" content="http://yoursite.com/images/entropy.png">
   
   
-  <title>模拟退火算法 - 碎月如歌</title>
+  <title>决策树 - 碎月如歌</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -179,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="模拟退火算法">
+            <span class="h2" id="subtitle" title="决策树">
               
             </span>
 
@@ -189,8 +188,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-30 13:59" pubdate>
-        2021年10月30日 下午
+      <time datetime="2022-01-03 22:53" pubdate>
+        2022年1月3日 晚上
       </time>
     </span>
   
@@ -200,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      1.1k 字
     </span>
   
 
@@ -209,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      10 分钟
     </span>
   
 
@@ -238,27 +237,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">模拟退火算法</h1>
+            <h1 style="display: none">决策树</h1>
             
             <div class="markdown-body">
-              <h2 id="模拟退火算法">模拟退火算法</h2>
-<p>  模拟退火算法是上世纪80年代产生的优化算法，应用于在较大空间中寻找问题的最优解，也是解决TSP问题的一大利器。模拟退火是物质从无序（高温）逐渐趋向（降温）于有序（低温/恒温）的过程。因此在模拟退火算法优化的过程中，从始至终是有一个温度贯穿其中的。那温度在优化过程中起到的作用是什么呢？</p>
-<span id="more"></span>
-<h3 id="算法简介">算法简介</h3>
-<p>  针对一个优化问题，存在非常多的解，可以采用模拟退火（sa）算法逐渐的逼近最优解。它的求解过程是：从一个初始解出发，然后进行局部搜索，获得一个新解，是否接受新解由模拟退火来决定，所以sa在其中起到的作用就是是否接受当前这个新的解。</p>
-<p>  sa中包含几个参数:T温度，$$ 降温系数，n迭代次数。n是指在每个温度T下的迭代次数。具体执行流程如下图所示：</p>
+              <h2 id="决策树">决策树</h2>
+<h3 id="决策树三要素">决策树三要素</h3>
+<ol type="1">
+<li><p>特征选择</p></li>
+<li><p>决策树生成</p></li>
+<li><p>决策树剪枝</p>
+<ol type="1">
+<li><p>预剪枝</p>
+<p>限制树的深度，叶子节点个数，叶子节点样本数，信息增益等</p></li>
+<li><p>后剪枝</p>
+<p>正则化</p></li>
+</ol></li>
+</ol>
+<h3 id="id3">ID3</h3>
+<p>  ID3是根据信息增益来选择特征，将数据划分成多份，构成决策树。</p>
+<h4 id="信息增益">信息增益</h4>
+<p>  信息增益是什么呢？划分数据前后 数据中<strong>“信息量”</strong>的 变化，通常选择信息增益最大的特征作为当前划分的依据。</p>
+<h4 id="信息熵">信息熵</h4>
+<p>  如何衡量<strong>“信息量”</strong>呢？这里引入熵的概念，熵表示信息不确定性的程度，熵越大，不确定性越强，熵越小，不确定性越小(越确定)。熵的公式如下：</p>
+<p><span class="math display">\[H(X)=-sum{i_1}^{i=n}p_{i}*log(p_{i})\]</span></p>
+<p>  n样本是分类的个数，<span class="math inline">\(p_{i}\)</span>表示样本分类为类别i的概率。熵的大小是和每个类别的概率有关的。</p>
 <figure>
-<img src="/images/sa.png" srcset="/img/loading.gif" lazyload alt="sa" /><figcaption aria-hidden="true">sa</figcaption>
+<img src="/images/entropy.png" srcset="/img/loading.gif" lazyload alt="entropy" /><figcaption aria-hidden="true">entropy</figcaption>
 </figure>
-<p>模拟退火中的T和n控制整个流程的进行，在每个温度T下都要执行n步（即n次迭代），n步执行完成之后，更新T。每次得到新解之后，都要对新解进行判断，是否接受。假设我们的优化目标（衡量新解的方法）为<span class="math inline">\(f(x)\)</span>，我们求解的过程中是优化目标的值越小越好，所以如何来衡量新解与旧解的优劣呢。<strong>若新解优于上一步的解，直接接受，若不优于上一步的解，则有概率的接受</strong>。依据下面的公式：</p>
-<p><span class="math display">\[rand &lt; exp(-(f(x&#39;)-f(x)) / T)\]</span></p>
-<p>来确定新解是否接受。指数函数的图像如下图所示：</p>
-<figure>
-<img src="/images/exp.gif" srcset="/img/loading.gif" lazyload alt="exp" /><figcaption aria-hidden="true">exp</figcaption>
-</figure>
-<p>当新解比旧解要差时，<span class="math inline">\(-(f(x&#39;)-f(x)) &lt; 0\)</span>，即指数幂值在y轴的左侧，当T值较大时，指数幂值在靠近y轴的左侧部分，即概率值较大，接受较差解的概率要高一些，当随着温度T的下降，指数幂值值也降低，接受差解的概率较小。即模拟退火算法也是在前期可以较高概率的接受差解，从而快速跳出局部最优，随着搜索的进行，温度T逐渐下降，便不容易跳出当前范围。这也有点像深度学习调参的过程，初期学习率lr较大，随着求解过程的进行，学习率lr降低是一样的道理。<strong>若想在后期也以一个较大的概率接受差解，随着温度的降低或迭代次数的进行 可以在分母上乘一个值，提高分母的值，增大概率</strong>。</p>
-<p>代码如下：</p>
-<figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;math&quot;</span><br>	<span class="hljs-string">&quot;math/rand&quot;</span><br>	<span class="hljs-string">&quot;GoProject/algorithm/heuristic&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">getFuncRes</span><span class="hljs-params">(x, y <span class="hljs-keyword">float64</span>)</span> <span class="hljs-title">float64</span></span>&#123; <span class="hljs-comment">// 目标函数</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">6.0</span> * math.Pow(x, <span class="hljs-number">7</span>) + <span class="hljs-number">8.0</span> * math.Pow(x, <span class="hljs-number">6</span>)  + <span class="hljs-number">7.0</span> * math.Pow(x, <span class="hljs-number">3</span>) + <span class="hljs-number">5</span> * math.Pow(x, <span class="hljs-number">2</span>) - x*y<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">SimulateAnneal</span><span class="hljs-params">()</span></span> &#123;<br>	result := math.MaxFloat64<br>	t := <span class="hljs-number">100.0</span><br>	minT := <span class="hljs-number">1e-8</span><br>	iterNum := <span class="hljs-number">10000</span><br>	delta := <span class="hljs-number">0.98</span><br>	rand.Seed(<span class="hljs-number">0</span>)<br>	x := rand.Float64() * <span class="hljs-number">100</span><br>	bestX := x<br>	fmt.Println(bestX)<br><br>	cnt := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> t &gt; minT &amp;&amp; iterNum &gt;= <span class="hljs-number">0</span> &#123;<br>		xNew := x + rand.Float64() * <span class="hljs-number">2</span> - <span class="hljs-number">1</span><br>		<span class="hljs-keyword">if</span> xNew &gt;= <span class="hljs-number">0</span> &amp;&amp; xNew &lt;= <span class="hljs-number">100</span> &#123;<br>			cnt++<br>			funcNew := getFuncRes(xNew, <span class="hljs-number">0</span>)<br>			<span class="hljs-keyword">if</span> funcNew &lt; result &#123;<br>				x = xNew<br>				bestX = x<br>				result = funcNew<br>			&#125; <span class="hljs-keyword">else</span> &#123;<br>				p := math.Exp(<span class="hljs-number">-1</span> * (funcNew - result) / t)<br>				<span class="hljs-keyword">if</span> rand.Float64() &lt; p &#123;<br>					x = xNew<br>				&#125;<br>				<span class="hljs-keyword">if</span> p &gt; <span class="hljs-number">0</span> &#123;<br>					<span class="hljs-comment">//fmt.Println(&quot;prob &quot;, p)</span><br>				&#125;<br><br>			&#125;<br>		&#125;<br>		iterNum--<br>		t = t * delta<br>	&#125;<br>	fmt.Println(bestX, result, cnt)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">LateAcc</span><span class="hljs-params">()</span></span> &#123;<br><br>	rand.Seed(<span class="hljs-number">0</span>)<br><br>	bestX := rand.Float64() * <span class="hljs-number">100</span><br>	bestRes := <span class="hljs-number">0.0</span><br><br>	pLa := <span class="hljs-built_in">new</span>(heuristic.LateAcceptance)<br>	pLa.Init(<span class="hljs-number">200</span>)<br><br>	pIterNum := <span class="hljs-number">10000</span><br>	cnt := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> pIterNum &gt; <span class="hljs-number">0</span> &#123;<br>		x := bestX + rand.Float64() * <span class="hljs-number">2</span> - <span class="hljs-number">1</span><br>		<span class="hljs-keyword">if</span> x &gt;= <span class="hljs-number">0</span> &amp;&amp; x &lt;= <span class="hljs-number">100</span> &#123;<br>			cnt++<br>			pRes := getFuncRes(x, <span class="hljs-number">0</span>)<br>			<span class="hljs-keyword">if</span> pLa.Accept(pRes) &#123;<br>				bestX = x<br>				bestRes = pRes<br>			&#125;<br>		&#125;<br>		pIterNum--<br>	&#125;<br>	fmt.Println(bestX, bestRes, cnt)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	SimulateAnneal()<br>	LateAcc()<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>  熵和概率的关系如上图所示：随着概率从小变大，熵的值先增大道最大值然后降到最小值，当概率值<span class="math inline">\(p=0.5\)</span>时，熵值最大，说明不确定性越大，当概率值<span class="math inline">\(p=0.9\)</span>时，熵值最小，不确定性越小。</p>
+<h4 id="条件熵">条件熵</h4>
+<p>  对于条件熵，则是当X的取值确定之后，在这个条件下的熵值。即当我们确定了样本某特征X的取值之后，即在这个条件下的熵值，<span class="math display">\[H(Y|X)=sum{i_1}^{i=n}p_{i}*H(Y|X=x_{i})\]</span>，举个例子，我们有一波样本D，共有k个类别<span class="math inline">\(C_{k}\)</span>，它的熵为H(D)，某一特征A有n个取值，依据特征A可以将数据集划分为n个子集，分别为<span class="math inline">\(D_{1}\)</span>，<span class="math inline">\(D_{2}\)</span>...<span class="math inline">\(D_{n}\)</span>，首先计算每个子集的信息熵H(D|A)，然后计算每个子集的样本占总样本的比例<span class="math inline">\(p_{i}\)</span>，然后将每个子集的信息熵*比例 加起来，就是特征A的条件熵。</p>
+<p>  所以回到ID3算法上，特征A对数据集D的信息增益就是<span class="math display">\[g(D,A)=H(D)-H(D|A)\]</span>。</p>
+<p>  在生成树的过程中，每次分裂时选择特征就是依据信息增益来选择最佳分裂点。选好最佳分裂点之后，依据特征取值将样本分成n(特征A取值的个数)叉树，然后在每个子树下面继续进行分裂，直到树生成完成。</p>
+<h4 id="id3算法的缺点">ID3算法的缺点：</h4>
+<ol type="1">
+<li>ID3没有考虑连续值，对于特征取值为连续值的情况无法适用。</li>
+<li>ID3选用信息增益作为分裂的依据，会更倾向于特征属性值多的作为分裂节点，举个例子：<span class="math inline">\(-1/3*log(1/3)*3\)</span> &gt; <span class="math inline">\(-1/2*log(1/2)*2\)</span>。</li>
+<li>ID3对于缺失值也无法出来，而且更容易过拟合。</li>
+</ol>
+<h4 id="为什么id3倾向于特征属性值偏多的特征">为什么ID3倾向于特征属性值偏多的特征？</h4>
+<p>  信息增益是整个数据集的经验熵与特征a对整个数据集的经验条件熵的差值，信息增益越大即经验条件熵越小 通俗的来讲,信息增益反映的给定一个条件以后不确定性减少的程度(特征A使得数据集的分类不确定性减少的程度) , 肯定是是分得越细的数据集确定性更高,也就是条件熵越小,信息增益越大。</p>
 
             </div>
             <hr>
@@ -268,7 +286,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                      <a class="hover-with-bg" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
                     
                   </div>
                 
@@ -276,7 +294,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB/">模拟退火</a>
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91%E6%A8%A1%E5%9E%8B/">树模型</a>
                     
                   </div>
                 
@@ -293,18 +311,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/03/%E5%86%B3%E7%AD%96%E6%A0%91/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">决策树</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/20/Spark-%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/">
-                        <span class="hidden-mobile">Spark-使用总结</span>
+                      <a href="/2021/10/30/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">模拟退火算法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
