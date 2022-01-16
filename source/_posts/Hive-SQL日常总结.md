@@ -75,7 +75,9 @@ select * from t1;
 
 [](https://zhuanlan.zhihu.com/p/113617244)
 
-## 2、分区表增加新的字段
+## 2、分区表字段处理
+
+### 1、增加新的字段
 
 &emsp;&emsp;之前遇到一个问题，就是一个非空分区表需要添加新的字段，然后把数据写入进去。
 
@@ -95,7 +97,15 @@ alter table table_name add columns(c1 int) cascade;
 
 [](https://blog.csdn.net/aijiudu/article/details/79066835)
 
+### 2、调整字段的位置
 
+&emsp;&emsp;有时候我们的表建好，写入数据之后，又想添加新的字段，或者想把一些物理意义较近的字段放在一起，所以我们需要调整字段，所以如何调整字段的位置呢？
+
+```sql
+alter table table_name c1 c1 float after c2 cascade;
+```
+
+&emsp;&emsp;上面的sql就是把float类型的c1字段移动到c2后面，对于分区表注意使用cascade哦。
 
 ## 3、将一个表的内容写入到另一个表中
 
