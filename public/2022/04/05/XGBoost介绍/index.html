@@ -16,23 +16,25 @@
   <meta name="author" content="silence kxm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="决策树决策树三要素 特征选择  决策树生成  决策树剪枝  预剪枝 限制树的深度，叶子节点个数，叶子节点样本数，信息增益等  后剪枝 正则化     ID3&amp;emsp;&amp;emsp;ID3是根据信息增益来选择特征，将数据划分成多份，构成决策树。 信息增益&amp;emsp;&amp;emsp;信息增益是什么呢？划分数据前后 数据中“信息量”的 变化，通常选择信息增益最大的特征作为当前划分的依据。 信息熵&amp;emsp;">
+    <meta name="description" content="一、简介   XGBoost(eXtreme Gradient Boosting)又叫极度梯度提升树，是boosting算法的一种实现方式。针对分类或回归问题，效果非常好。在各种数据竞赛中大放异彩，而且在工业界也是应用广泛，主要是因为其效果优异，使用简单，速度快等优点。本文主要从以下几个方面介绍该算法模型：  二、基本原理   xgb是boosting算法的一种实现方式，主要是降低偏差，也就是降低">
 <meta property="og:type" content="article">
-<meta property="og:title" content="决策树">
-<meta property="og:url" content="http://yoursite.com/2022/01/03/%E5%86%B3%E7%AD%96%E6%A0%91/index.html">
+<meta property="og:title" content="XGBoost介绍">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/XGBoost%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="决策树决策树三要素 特征选择  决策树生成  决策树剪枝  预剪枝 限制树的深度，叶子节点个数，叶子节点样本数，信息增益等  后剪枝 正则化     ID3&amp;emsp;&amp;emsp;ID3是根据信息增益来选择特征，将数据划分成多份，构成决策树。 信息增益&amp;emsp;&amp;emsp;信息增益是什么呢？划分数据前后 数据中“信息量”的 变化，通常选择信息增益最大的特征作为当前划分的依据。 信息熵&amp;emsp;">
+<meta property="og:description" content="一、简介   XGBoost(eXtreme Gradient Boosting)又叫极度梯度提升树，是boosting算法的一种实现方式。针对分类或回归问题，效果非常好。在各种数据竞赛中大放异彩，而且在工业界也是应用广泛，主要是因为其效果优异，使用简单，速度快等优点。本文主要从以下几个方面介绍该算法模型：  二、基本原理   xgb是boosting算法的一种实现方式，主要是降低偏差，也就是降低">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/entropy.png">
-<meta property="article:published_time" content="2022-01-03T14:53:43.000Z">
-<meta property="article:modified_time" content="2022-01-09T14:05:41.839Z">
+<meta property="og:image" content="http://yoursite.com/images/xgb.png">
+<meta property="og:image" content="http://yoursite.com/images/xgb1.png">
+<meta property="og:image" content="http://yoursite.com/images/xgb2.png">
+<meta property="article:published_time" content="2022-04-05T01:41:18.000Z">
+<meta property="article:modified_time" content="2022-04-05T08:55:21.380Z">
 <meta property="article:author" content="silence kxm">
 <meta property="article:tag" content="树模型">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://yoursite.com/images/entropy.png">
+<meta name="twitter:image" content="http://yoursite.com/images/xgb.png">
   
   
-  <title>决策树 - 碎月如歌</title>
+  <title>XGBoost介绍 - 碎月如歌</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +180,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="决策树">
+            <span class="h2" id="subtitle" title="XGBoost介绍">
               
             </span>
 
@@ -188,8 +190,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-03 22:53" pubdate>
-        2022年1月3日 晚上
+      <time datetime="2022-04-05 09:41" pubdate>
+        2022年4月5日 上午
       </time>
     </span>
   
@@ -199,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      3.8k 字
     </span>
   
 
@@ -208,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11 分钟
+      32 分钟
     </span>
   
 
@@ -237,41 +239,29 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">决策树</h1>
+            <h1 style="display: none">XGBoost介绍</h1>
             
             <div class="markdown-body">
-              <h2 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h2><h3 id="决策树三要素"><a href="#决策树三要素" class="headerlink" title="决策树三要素"></a>决策树三要素</h3><ol>
-<li><p>特征选择</p>
-</li>
-<li><p>决策树生成</p>
-</li>
-<li><p>决策树剪枝</p>
-<ol>
-<li><p>预剪枝</p>
-<p>限制树的深度，叶子节点个数，叶子节点样本数，信息增益等</p>
-</li>
-<li><p>后剪枝</p>
-<p>正则化</p>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h3><p>&emsp;&emsp;ID3是根据信息增益来选择特征，将数据划分成多份，构成决策树。</p>
-<h4 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h4><p>&emsp;&emsp;信息增益是什么呢？划分数据前后 数据中<strong>“信息量”</strong>的 变化，通常选择信息增益最大的特征作为当前划分的依据。</p>
-<h4 id="信息熵"><a href="#信息熵" class="headerlink" title="信息熵"></a>信息熵</h4><p>&emsp;&emsp;如何衡量<strong>“信息量”</strong>呢？这里引入熵的概念，熵表示信息不确定性的程度，熵越大，不确定性越强，熵越小，不确定性越小(越确定)。熵的公式如下：</p>
-<script type="math/tex; mode=display">H(X)=-sum_{i=1}^{i=n}p_{i}*log(p_{i})</script><p>&emsp;&emsp;n样本是分类的个数，$p_{i}$表示样本分类为类别i的概率。熵的大小是和每个类别的概率有关的。</p>
-<p><img src="/images/entropy.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>&emsp;&emsp;熵和概率的关系如上图所示：随着概率从小变大，熵的值先增大道最大值然后降到最小值，当概率值$p=0.5$时，熵值最大，说明不确定性越大，当概率值$p=0.9$时，熵值最小，不确定性越小。</p>
-<h4 id="条件熵"><a href="#条件熵" class="headerlink" title="条件熵"></a>条件熵</h4><p>&emsp;&emsp;对于条件熵，则是当X的取值确定之后，在这个条件下的熵值。即当我们确定了样本某特征X的取值之后，即在这个条件下的熵值，</p>
-<script type="math/tex; mode=display">H(Y|X)=sum_{i=1}^{i=n}p_{i}*H(Y|X=x_{i})</script><p>&emsp;&emsp;举个例子我们有一波样本D，共有k个类别$C_{k}$，它的熵为H(D)，某一特征A有n个取值，依据特征A可以将数据集划分为n个子集，分别为$D_{1}$，$D_{2}$…$D_{n}$，首先计算每个子集的信息熵H(D|A)，然后计算每个子集的样本占总样本的比例$p_{i}$，然后将每个子集的信息熵*比例 加起来，就是特征A的条件熵。</p>
-<p>&emsp;&emsp;所以回到ID3算法上，特征A对数据集D的信息增益就是<script type="math/tex">g(D,A)=H(D)-H(D|A)</script>。</p>
-<p>&emsp;&emsp;在生成树的过程中，每次分裂时选择特征就是依据信息增益来选择最佳分裂点。选好最佳分裂点之后，依据特征取值将样本分成n(特征A取值的个数)叉树，然后在每个子树下面继续进行分裂，直到树生成完成。</p>
-<h4 id="ID3算法的缺点："><a href="#ID3算法的缺点：" class="headerlink" title="ID3算法的缺点："></a>ID3算法的缺点：</h4><ol>
-<li>ID3没有考虑连续值，对于特征取值为连续值的情况无法适用。</li>
-<li>ID3选用信息增益作为分裂的依据，会更倾向于特征属性值多的作为分裂节点，举个例子：$-1/3<em>log(1/3)</em>3$ &gt; $-1/2<em>log(1/2)</em>2$。</li>
-<li>ID3对于缺失值也无法出来，而且更容易过拟合。</li>
-</ol>
-<h4 id="为什么ID3倾向于特征属性值偏多的特征？"><a href="#为什么ID3倾向于特征属性值偏多的特征？" class="headerlink" title="为什么ID3倾向于特征属性值偏多的特征？"></a>为什么ID3倾向于特征属性值偏多的特征？</h4><p>&emsp;&emsp;信息增益是整个数据集的经验熵与特征a对整个数据集的经验条件熵的差值，信息增益越大即经验条件熵越小<br>通俗的来讲,信息增益反映的给定一个条件以后不确定性减少的程度(特征A使得数据集的分类不确定性减少的程度) , 肯定是是分得越细的数据集确定性更高,也就是条件熵越小,信息增益越大。</p>
+              <h1 id="一简介">一、简介</h1>
+<p>  XGBoost(eXtreme Gradient Boosting)又叫极度梯度提升树，是boosting算法的一种实现方式。针对分类或回归问题，效果非常好。在各种数据竞赛中大放异彩，而且在工业界也是应用广泛，主要是因为其效果优异，使用简单，速度快等优点。本文主要从以下几个方面介绍该算法模型：</p>
+<p><img src="/images/xgb.png" srcset="/img/loading.gif" lazyload /></p>
+<h1 id="二基本原理">二、基本原理</h1>
+<p>  xgb是boosting算法的一种实现方式，主要是降低偏差，也就是降低模型的误差。因此它是采用多个基学习器，每个基学习器都比较简单，避免过拟合，下一个学习器是学习前面基学习器的结果<span class="math inline">\(y^{t}_{i}\)</span>和实际值<span class="math inline">\(y_{i}\)</span>的差值，通过多个学习器的学习，不断降低模型值和实际值的差。 <span class="math display">\[y_{i}^{0} = 0\]</span> <span class="math display">\[y_{i}^{1} = f_{1}(x_{i}) = y_{i}^{0}+f_{1}(x_{i})\]</span> <span class="math display">\[$y_{i}^{2}=f_{1}(x_{i})+f_{2}(x_{i})=y_{i}^{1}+f_{2}(x_{i})\]</span> <span class="math display">\[y_{i}^{t}=\sum_{k=1}^{t}f_{k}(x_{i})=y_{i}^{t-1}+f_{t}(x_{i})\]</span> 基本思路就是不断生成新的树，每棵树都是基于上一颗树和目标值的差值来进行学习，从而降低模型的偏差。最终模型结果的输出如下：<span class="math inline">\(y_{i}=\sum_{k=1}^{t}f_{k}(x_{i})\)</span>，即所有树的结果累加起来才是模型对一个样本的预测值。那在每一步如何选择/生成一个较优的树呢？那就是由我们的<strong>目标函数</strong>来决定。</p>
+<h1 id="三目标函数">三、目标函数</h1>
+<p>  目标函数由两部分组成，一是模型误差，即样本真实值和预测值之间的差值，二是模型的结构误差，即正则项，用于限制模型的复杂度。 <span class="math display">\[Obj(\theta)=L(\theta)+\Omega(\theta)=L(y_{i},y_{i}^{t})+\sum_{k=1}^{t}\Omega(f_{k}(x_{i}))\]</span> 因为<span class="math inline">\(y_{i}^{t}=y_{i}^{t-1}+f_{t}(x_{i})\)</span>，所以将其带入上面的公式中转换为： <span class="math inline">\(Obj^{t}=\sum_{n=1}^{n}L(y_{i},y_{i}^{t-1}+f_{t}(x_{i}))+\Omega(f_{t})+\sum_{t=1}^{T-1}\Omega(f_{t})\)</span>，第t颗树的误差由三部分组成，n个样本在第t颗树的误差求和，以及第t颗树的结构误差和前t-1颗树的结构误差。其中前t-1颗树的结构误差是常数，因为我们已经知道前t-1颗树的结构了。   <strong>假设</strong>我们的损失函数是平方损失函数(mse)，则上述目标函数转换为： <span class="math display">\[Obj^{t}=\sum_{i=1}^{n}L(y_{i},y_{i}^{t-1}+f_{t}(x_{i}))+\Omega(f_{t})+\sum_{t=1}^{T-1}\Omega(f_{t}) \\ =\sum_{i=1}^{n}(y_{i}-(y_{i}^{t-1}+f_{t}(x_{i})))^2+\Omega(f_{t})+constant\]</span> 上述公式即为损失函数为mse时xgb第t步的目标函数。唯一的变量即为<span class="math inline">\(f_{t}\)</span>，此处的损失函数仍然是一个相对复杂的表达式，所以为了简化它，采用二阶泰勒展开来近似表达，即<span class="math display">\[f(x+\Delta x)=f(x)+f^{&#39;}(x)\Delta x+1/2f^{&#39;&#39;}(x)\Delta x^2\]</span>，所以另<span class="math inline">\(g_{i}=\partial _{y_{i}^{t-1}}l(y_{i},y_{i}^{t-1})\)</span>，<span class="math inline">\(h_{i}=\partial _{y_{i}^{t-1}} ^ 2 l(y_{i},y_{i}^{t-1})\)</span>，即分别是<span class="math inline">\(l(y_{i},y_{i}^{t-1})\)</span>的一阶导和二阶导。则上述损失函数转换为二阶导之后，<span class="math display">\[Obj^{t}=\sum_{i=1}^{n}[l(y_{i},y_{i}^{t-1})+g_{i} f_{t}(x_{})+1/2h_{i} f_{t}^2(x)]+\Omega(f_{t})+constant\]</span>，   所以当损失函数是mse时，<span class="math inline">\(g_{i}=2(y_{i}^{t-1}-y_{i})\)</span>，<span class="math inline">\(h_{i}=2\)</span>。   经过转换之后，其中第一项是所有样本与第t-1颗树的误差之和，因为第t-1颗树是已知的，所以可以将其视为常数项，我们暂时在目标函数中将其舍去，我们的目标函数变为关于<span class="math inline">\(f_{t}(x)\)</span>的函数了。而<span class="math inline">\(f_{t}(x)\)</span>则是关于叶子节点输出<span class="math inline">\(w\)</span>的函数，所以我们的目标函数全部转换为关于<span class="math inline">\(w\)</span>的函数，<span class="math display">\[Obj^{t}=\sum_{i=1}^{n}[g_{i} f_{t}(x_{})+1/2h_{i} f_{t}^2(x)]+\Omega(f_{t})+constant \\ =\sum_{i=1}^{n}[g_{i}w_{q}(x_{i})+1/2h_{i}w_{q}^2(x_{i})]+\gamma T+1/2\lambda\sum_{j=1}^{T}w_{j}^{2} \\ =\sum_{j=1}^{T}[\sum_{i \in I_{j}}(g_{i})*w_{j}+1/2*\sum_{i \in I_{j}}(h_{i}+\lambda)w_{j}^2]+\gamma T\]</span>。我们令<span class="math inline">\(G_{j}=\sum_{i \in I_{j}}(g_{i})\)</span>，令<span class="math inline">\(H_{j}=\sum i \in I_{j}(h_{i})\)</span>，则我们的目标函数转换为<span class="math display">\[Obj^{t}=\sum_{j=1}^{T}G_{j}*w_{j}+1/2(H_{j}+\lambda)*w_{j}^{2}+\lambda T\]</span>。在上述表达式中，<span class="math inline">\(j表示第j个节点\)</span>，<span class="math inline">\(i表示第i个样本\)</span>。所以整个目标函数转换成了关于<span class="math inline">\(w\)</span>即叶节点分数的一元二次函数，想要优化目标函数，就是求解最优的w，因此我们对目标求导，得到<span class="math display">\[w^{*}=-G_{i}/(H_{i}+\lambda)\]</span>，将<span class="math inline">\(w^{*}\)</span>代入目标函数中，则目标函数变为<span class="math display">\[Obj^{t}=-1/2\sum_{j=1}^{T}G_{j}^{2}/(H_{j}+\lambda)+\lambda T\]</span>。如此简单，所以在求解二叉树的目标函数时，只要知道损失函数的一阶导、二阶导，以及样本落在哪个叶子节点上，我们只要求出在每个叶子节点上，该样本的一阶导和二阶导就能求出目标函数。也就能决定是否分裂该节点，依据哪个节点的特征值来进行分裂。</p>
+<h2 id="三节点分裂">三、节点分裂</h2>
+<p>   xgb节点是否分裂取决于信息增益的变化，若分裂当前节点，信息增益&gt;0，则进行分裂，若不大于0则不分裂，如何判断分列前后信息增益的变化呢。那就可以使用我们的目标函数来表示了。 <span class="math display">\[Gain=G_{L}^{2}/(H_{L}+\lambda)+G_{R}^{2}/(H_{R}+\lambda)-(G_{L}+G_{R})^2/(H_{L}+H_{R}+\lambda)+\gamma\]</span>   节点分裂有两种方式：1、贪心算法，2、近似算法 ### 3.1 贪心算法   贪心算法分裂的方式就是一种暴力搜索的方式，遍历每一个特征，遍历该特征的每一个取值，计算分裂前后的增益，选择增益最大的特征取值作为分裂点。 <img src="/images/xgb1.png" srcset="/img/loading.gif" lazyload alt="贪心算法" /> 分裂流程如上图所示。</p>
+<h3 id="近似算法">3.2 近似算法</h3>
+<p>   近似算法，其实就是分桶，目的是为了提升计算速度，降低遍历的次数，所以对特征进行分桶。就是将每一个特征的取值按照分位数划分到不同的桶中，利用桶的边界值作为分裂节点的候选集，每次遍历时不再是遍历所有特征取值，而是仅遍历该特征的几个桶（每个桶可以理解为该特征取值的分位数）就可以，这样可以降低遍历特征取值的次数。</p>
+<figure>
+<img src="/images/xgb2.png" srcset="/img/loading.gif" lazyload alt="近似算法" /><figcaption aria-hidden="true">近似算法</figcaption>
+</figure>
+<p>  分桶算法分为global模式和local模式，global模式就是在第一次划分桶之后，不再更新桶，一直使用划分完成的桶进行后续的分裂。这样做就是计算复杂度降低，但是经过多次划分之后，可能会存在一些桶是空的，即该桶中已经没有了数据。   local模式就是在每次分列前都重新划分桶，优点是每次分桶都能保证各桶中的样本数量都是均匀的，不足的地方就是计算量大。</p>
+<h2 id="四其它特点">四、其它特点</h2>
+<h3 id="缺失值处理">4.1 缺失值处理</h3>
+<p>   对于存在某一维特征缺失的样本，xgb会尝试将其放到左子树计算一次增益，再放到右子树计算一次增益，对比放在左右子树增益的大小决定放在哪个子树。 ### 4.2 防止过拟合    xgb提出了两种防止过拟合的方法：第一种称为Shrinkage，即学习率，在每次迭代一棵树的时候对每个叶子结点的权重乘上一个缩减系数，使每棵树的影响不会过大，并且给后面的树留下更大的空间优化。另一个方法称为Column Subsampling，类似于随机森林选区部分特征值进行建树，其中又分为两个方式:方式一按层随机采样，在对同一层结点分裂前，随机选取部分特征值进行遍历，计算信息增益；方式二在建一棵树前随机采样部分特征值，然后这棵树的所有结点分裂都遍历这些特征值，计算信息增益。</p>
+<h2 id="五总结">五、总结</h2>
+<p>  以上是对xgb的一些理解，大多是观看了很多大神的博客，通过不断的看别人总结的部分以及公式的推导，才让我逐渐理解xgb的各种特征。本文还是有很多不足的地方，后续逐渐补充，完善。</p>
 
             </div>
             <hr>
@@ -306,18 +296,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/05/XGBoost%E4%BB%8B%E7%BB%8D/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">XGBoost介绍</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/30/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/">
-                        <span class="hidden-mobile">模拟退火算法</span>
+                      <a href="/2022/01/03/%E5%86%B3%E7%AD%96%E6%A0%91/">
+                        <span class="hidden-mobile">决策树</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
