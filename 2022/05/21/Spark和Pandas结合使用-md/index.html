@@ -16,15 +16,15 @@
   <meta name="author" content="silence kxm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本篇文章主要讲解spark和pandas结合应用的一个例子，我之前在工作中总是单纯的使用spark，有时候会将DataFrame转换为临时表，然后使用Hive-sql处理，或者是写Udf做稍微复杂一些的处理。在前段时间接触到spark可以和pandas结合使用，还真是又涨了点知识。   举一个例子，一个DataFrame的size是[m,n]，我想对其进行groupby操作，然后返对每个分组内">
+    <meta name="description" content="&amp;emsp;&amp;emsp;本篇文章主要讲解spark和pandas结合应用的一个例子，我之前在工作中总是单纯的使用spark，有时候会将DataFrame转换为临时表，然后使用Hive-sql处理，或者是写Udf做稍微复杂一些的处理。在前段时间接触到spark可以和pandas结合使用，还真是又涨了点知识。 &amp;emsp;&amp;emsp;举一个例子，一个DataFrame的size是[m,n]，我想对其进">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark和Pandas结合使用.md">
 <meta property="og:url" content="http://yoursite.com/2022/05/21/Spark%E5%92%8CPandas%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8-md/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="本篇文章主要讲解spark和pandas结合应用的一个例子，我之前在工作中总是单纯的使用spark，有时候会将DataFrame转换为临时表，然后使用Hive-sql处理，或者是写Udf做稍微复杂一些的处理。在前段时间接触到spark可以和pandas结合使用，还真是又涨了点知识。   举一个例子，一个DataFrame的size是[m,n]，我想对其进行groupby操作，然后返对每个分组内">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本篇文章主要讲解spark和pandas结合应用的一个例子，我之前在工作中总是单纯的使用spark，有时候会将DataFrame转换为临时表，然后使用Hive-sql处理，或者是写Udf做稍微复杂一些的处理。在前段时间接触到spark可以和pandas结合使用，还真是又涨了点知识。 &amp;emsp;&amp;emsp;举一个例子，一个DataFrame的size是[m,n]，我想对其进">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-21T10:35:01.000Z">
-<meta property="article:modified_time" content="2022-05-21T12:12:17.791Z">
+<meta property="article:modified_time" content="2022-05-21T12:14:52.477Z">
 <meta property="article:author" content="silence kxm">
 <meta property="article:tag" content="spark">
 <meta name="twitter:card" content="summary_large_image">
@@ -197,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6k 字
+      6.1k 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      51 分钟
+      52 分钟
     </span>
   
 
@@ -238,29 +238,31 @@
             <h1 style="display: none">Spark和Pandas结合使用.md</h1>
             
             <div class="markdown-body">
-              <p>  本篇文章主要讲解spark和pandas结合应用的一个例子，我之前在工作中总是单纯的使用spark，有时候会将DataFrame转换为临时表，然后使用Hive-sql处理，或者是写Udf做稍微复杂一些的处理。在前段时间接触到spark可以和pandas结合使用，还真是又涨了点知识。</p>
-<p>  举一个例子，一个DataFrame的size是[m,n]，我想对其进行groupby操作，然后返对每个分组内的上下两个row进行一些操作，最后返回一个和和原DataFrame大小一致的新df，最初我想到的一个方案是对组内每两行先打一个相同的tag，然后再结合window进行操作，不过这种方案比较麻烦，不直观，而且对每两行之间做一些复杂的运算可能也不是很友好。或者另一个场景，一个df，第一列是id，第二列是不同的品牌，想要统计某个id下各个品牌的数量(可以有重复)，这时一种常规的方案是对每个品牌进行映射到一个新的列，然后若这一行是品牌1，则打标记为1，其它为0，品牌2的列同理，这样处理起来略显麻烦，pandas就可以很简单的处理。</p>
-<p>  再举一个例子，我想对df分组，计算组内分位数，但是我要求分位数必须是组内出现的数字，而不是插值之后的数字，并且还要对一些异常值进行判断。你可能会想到使用hivesql中的percentile来做，但是它返回的未必是组内的值，而且对异常值判断不是很方便。</p>
-<p>  对于上面两个例子，单纯的使用spark和hivesql都不是最优雅的方案，这时候pandas就出现了，它可以很好地解决这两类问题。</p>
+              <p>&emsp;&emsp;本篇文章主要讲解spark和pandas结合应用的一个例子，我之前在工作中总是单纯的使用spark，有时候会将DataFrame转换为临时表，然后使用Hive-sql处理，或者是写Udf做稍微复杂一些的处理。在前段时间接触到spark可以和pandas结合使用，还真是又涨了点知识。</p>
+<p>&emsp;&emsp;举一个例子，一个DataFrame的size是[m,n]，我想对其进行groupby操作，然后返对每个分组内的上下两个row进行一些操作，最后返回一个和和原DataFrame大小一致的新df，最初我想到的一个方案是对组内每两行先打一个相同的tag，然后再结合window进行操作，不过这种方案比较麻烦，不直观，而且对每两行之间做一些复杂的运算可能也不是很友好。或者另一个场景，一个df，第一列是id，第二列是不同的品牌，想要统计某个id下各个品牌的数量(可以有重复)，这时一种常规的方案是对每个品牌进行映射到一个新的列，然后若这一行是品牌1，则打标记为1，其它为0，品牌2的列同理，这样处理起来略显麻烦，pandas就可以很简单的处理。</p>
+<p>&emsp;&emsp;再举一个例子，我想对df分组，计算组内分位数，但是我要求分位数必须是组内出现的数字，而不是插值之后的数字，并且还要对一些异常值进行判断。你可能会想到使用hivesql中的percentile来做，但是它返回的未必是组内的值，而且对异常值判断不是很方便。</p>
+<p>&emsp;&emsp;对于上面两个例子，单纯的使用spark和hivesql都不是最优雅的方案，这时候pandas就出现了，它可以很好地解决这两类问题。</p>
 <span id="more"></span>
-<h2 id="一环境介绍">一、环境介绍</h2>
-<p>  简单介绍下我所应用的环境：首先是要安装pyarrow这个库，其次python版本不要高于3.7，最后spark环境，我之前使用的是2.4，一直报错，折腾了好久，后来发现是环境问题，切换到3.2就可以了。</p>
+<h2 id="一、环境介绍"><a href="#一、环境介绍" class="headerlink" title="一、环境介绍"></a>一、环境介绍</h2><p>&emsp;&emsp;简单介绍下我所应用的环境：首先是要安装pyarrow这个库，其次python版本不要高于3.7，最后spark环境，我之前使用的是2.4，一直报错，折腾了好久，后来发现是环境问题，切换到3.2就可以了。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">spark:spark-3.2.0-bin-hadoop2.7<br>python:3.7<br>pyarrow:8.0.0<br></code></pre></td></tr></table></figure>
-<h2 id="二spark与pandas结合">二、Spark与Pandas结合</h2>
-<p>  spark和pandas结合其实就是把一部分sparkdataframe，转换为pandas dataframe，然后可以比较方便的进行数值计算，就像写单机pandas操作一样。</p>
-<p>  我们需要用到 <strong>pyspark.sql.functions import pandas_udf, PandasUDFType</strong>，这两个函数，顾名思义，pandas_udf就是用户自定义的pandas函数</p>
+<h2 id="二、Spark与Pandas结合"><a href="#二、Spark与Pandas结合" class="headerlink" title="二、Spark与Pandas结合"></a>二、Spark与Pandas结合</h2><p>&emsp;&emsp;spark和pandas结合其实就是把一部分sparkdataframe，转换为pandas dataframe，然后可以比较方便的进行数值计算，就像写单机pandas操作一样。</p>
+<p>&emsp;&emsp;我们需要用到 <strong>pyspark.sql.functions import pandas_udf, PandasUDFType</strong>，这两个函数，顾名思义，pandas_udf就是用户自定义的pandas函数</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pandas_udf</span>(<span class="hljs-params"></span></span><br><span class="hljs-params"><span class="hljs-function">    f: PandasScalarToScalarFunction,</span></span><br><span class="hljs-params"><span class="hljs-function">    returnType: <span class="hljs-type">Union</span>[AtomicDataTypeOrString, ArrayType],</span></span><br><span class="hljs-params"><span class="hljs-function">    functionType: PandasScalarUDFType,</span></span><br><span class="hljs-params"><span class="hljs-function"></span>) -&gt; UserDefinedFunctionLike:</span> ...<br><br></code></pre></td></tr></table></figure>
 <p>pandas_udf就三个参数：</p>
 <ul>
-<li><p>f：即用户自定义的func</p></li>
-<li><p>returnType：自定义的func返回的值类型</p></li>
+<li><p>f：即用户自定义的func</p>
+</li>
+<li><p>returnType：自定义的func返回的值类型</p>
+</li>
 <li><p>functionType：枚举值，包含下面四种方式，表示的是我们的函数是按照什么样的方式进行映射，即返回值和输入是怎样的映射关系:</p>
-<p>SCALAR: PandasScalarUDFType ：标量，即返回一个值 SCALAR_ITER: PandasScalarIterUDFType ：迭代器，这个还需要我探索一下 GROUPED_MAP: PandasGroupedMapUDFType ：分组映射，分组之后返回df，可以和原df大小一致，也可不一致，用户自己可以控制 GROUPED_AGG: PandasGroupedAggUDFType ：分组聚合，分组之后返回一个常量值</p></li>
+<p>SCALAR: PandasScalarUDFType          ：标量，即返回一个值<br>SCALAR_ITER: PandasScalarIterUDFType ：迭代器，这个还需要我探索一下<br>GROUPED_MAP: PandasGroupedMapUDFType ：分组映射，分组之后返回df，可以和原df大小一致，也可不一致，用户自己可以控制<br>GROUPED_AGG: PandasGroupedAggUDFType ：分组聚合，分组之后返回一个常量值</p>
+</li>
 </ul>
-<p> <strong> 今天主要介绍一下GROUPED_MAP和GROUP_AGG的用法。</strong></p>
+<p>&emsp;<strong>&emsp;今天主要介绍一下GROUPED_MAP和GROUP_AGG的用法。</strong></p>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>方法</th>
 <th>输入</th>
 <th>输出</th>
@@ -270,7 +272,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>GROUPED_MAP</td>
 <td>Datafram</td>
 <td>Dataframe</td>
@@ -278,7 +280,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>GROUPED_AGG</td>
 <td>一列或多列</td>
 <td>常量</td>
@@ -286,8 +288,7 @@
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
-<td></td>
+<tr>
 <td></td>
 <td></td>
 <td></td>
@@ -296,14 +297,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="grouped_agg">1、GROUPED_AGG</h3>
-<p>  就拿上面那个计算组内分位数的例子来做，</p>
+</div>
+<h3 id="1、GROUPED-AGG"><a href="#1、GROUPED-AGG" class="headerlink" title="1、GROUPED_AGG"></a>1、GROUPED_AGG</h3><p>&emsp;&emsp;就拿上面那个计算组内分位数的例子来做，</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> findspark<br>findspark.init(<span class="hljs-string">&quot;/usr/local/spark-3.2.0-bin-hadoop2.7&quot;</span>)<br><br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession<br><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> functions <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> types <span class="hljs-keyword">as</span> T<br><span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> pandas_udf, PandasUDFType<br><br><br>spark = SparkSession.builder.appName(<span class="hljs-string">&#x27;xxx&#x27;</span>).config(<span class="hljs-string">&quot;spark.driver.host&quot;</span>, <span class="hljs-string">&quot;xxx&quot;</span>).config(<span class="hljs-string">&quot;spark.driver.bindAddress&quot;</span>, <span class="hljs-string">&quot;xxxx&quot;</span>).getOrCreate()<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">M</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f</span>(<span class="hljs-params">self</span>):</span><br>        df = spark.createDataFrame(<br>            [(<span class="hljs-string">&quot;a1&quot;</span>, <span class="hljs-number">2.2</span>, <span class="hljs-number">5</span>), (<span class="hljs-string">&quot;a1&quot;</span>, <span class="hljs-number">3.16</span>, <span class="hljs-number">1</span>), (<span class="hljs-string">&quot;a1&quot;</span>, <span class="hljs-number">2.168</span>, <span class="hljs-number">3</span>), (<span class="hljs-string">&quot;a1&quot;</span>, <span class="hljs-number">2.5</span>, <span class="hljs-number">4</span>), (<span class="hljs-string">&quot;a2&quot;</span>, <span class="hljs-number">1.915</span>, <span class="hljs-number">2</span>), (<span class="hljs-string">&quot;a2&quot;</span>, <span class="hljs-number">2.0</span>, <span class="hljs-number">4</span>),<br>             (<span class="hljs-string">&quot;a2&quot;</span>, <span class="hljs-number">1.509</span>, <span class="hljs-number">1</span>), (<span class="hljs-string">&quot;a2&quot;</span>, <span class="hljs-number">2.1</span>, <span class="hljs-number">2</span>)],<br>            [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;max_wheel&quot;</span>, <span class="hljs-string">&quot;cnt&quot;</span>])<br>        df.show()<br>        <span class="hljs-comment"># 定义pandas_udf，输入函数、返回值类型，聚合类型</span><br>        mean_udf = F.pandas_udf(M.__t_agg, <span class="hljs-string">&quot;string&quot;</span>, F.PandasUDFType.GROUPED_AGG)<br>        <span class="hljs-comment"># 应用udf，注意是使用agg，传入两列</span><br>        df = df.groupBy([<span class="hljs-string">&quot;id&quot;</span>]).agg(mean_udf(df[<span class="hljs-string">&quot;max_wheel&quot;</span>], df[<span class="hljs-string">&quot;cnt&quot;</span>]).alias(<span class="hljs-string">&quot;res&quot;</span>))<br>        df.show()<br><br>        df = df.withColumn(<span class="hljs-string">&quot;res&quot;</span>, F.split(df[<span class="hljs-string">&quot;res&quot;</span>], <span class="hljs-string">&quot;,&quot;</span>))<br>        df = df.withColumn(<span class="hljs-string">&quot;r1&quot;</span>, df[<span class="hljs-string">&quot;res&quot;</span>].getItem(<span class="hljs-number">0</span>)).withColumn(<span class="hljs-string">&quot;r2&quot;</span>, df[<span class="hljs-string">&quot;res&quot;</span>].getItem(<span class="hljs-number">1</span>))<br>        df.show()<br>        df.<span class="hljs-built_in">filter</span>(df[<span class="hljs-string">&quot;id&quot;</span>] == <span class="hljs-string">&#x27;a1&#x27;</span>).show()<br><br>    <span class="hljs-comment"># 定义具体的函数</span><br><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__t_agg</span>(<span class="hljs-params">v1, v2</span>):</span><br>        df = pd.DataFrame(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(v1, v2)), columns=[<span class="hljs-string">&quot;max_wheel&quot;</span>, <span class="hljs-string">&quot;cnt&quot;</span>])  <span class="hljs-comment"># 传入两列，转换为df</span><br>        a1 = <span class="hljs-built_in">round</span>(df[<span class="hljs-string">&quot;max_wheel&quot;</span>].quantile(q=<span class="hljs-number">0.5</span>, interpolation=<span class="hljs-string">&quot;lower&quot;</span>), <span class="hljs-number">2</span>) <span class="hljs-comment"># 不插值</span><br>        a2 = <span class="hljs-built_in">round</span>(df[<span class="hljs-string">&quot;cnt&quot;</span>].quantile(q=<span class="hljs-number">0.5</span>, interpolation=<span class="hljs-string">&quot;lower&quot;</span>), <span class="hljs-number">2</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;,&quot;</span>.join([<span class="hljs-built_in">str</span>(a1), <span class="hljs-built_in">str</span>(a2)])<br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    m = M()<br>    m.f()<br><br>--------------------------------------------------------------<br>输入<br>+---+---------+---+<br>| <span class="hljs-built_in">id</span>|max_wheel|cnt|<br>+---+---------+---+<br>| a1|      <span class="hljs-number">2.2</span>|  <span class="hljs-number">5</span>|<br>| a1|     <span class="hljs-number">3.16</span>|  <span class="hljs-number">1</span>|<br>| a1|    <span class="hljs-number">2.168</span>|  <span class="hljs-number">3</span>|<br>| a1|      <span class="hljs-number">2.5</span>|  <span class="hljs-number">4</span>|<br>| a2|    <span class="hljs-number">1.915</span>|  <span class="hljs-number">2</span>|<br>| a2|      <span class="hljs-number">2.0</span>|  <span class="hljs-number">4</span>|<br>| a2|    <span class="hljs-number">1.509</span>|  <span class="hljs-number">1</span>|<br>| a2|      <span class="hljs-number">2.1</span>|  <span class="hljs-number">2</span>|<br>+---+---------+---+<br><br>--------------------------------------------------------------<br>输出<br>+---+---------+----+---+<br>| <span class="hljs-built_in">id</span>|      res|  r1| r2|<br>+---+---------+----+---+<br>| a1| [<span class="hljs-number">2.2</span>, <span class="hljs-number">3</span>]| <span class="hljs-number">2.2</span>|  <span class="hljs-number">3</span>|<br>| a2|[<span class="hljs-number">1.92</span>, <span class="hljs-number">2</span>]|<span class="hljs-number">1.92</span>|  <span class="hljs-number">2</span>|<br>+---+---------+----+---+<br></code></pre></td></tr></table></figure>
-<h3 id="grouped_map">2、GROUPED_MAP</h3>
-<p>  就拿上面计算每个id下不同品牌的数量的例子来看：</p>
+<h3 id="2、GROUPED-MAP"><a href="#2、GROUPED-MAP" class="headerlink" title="2、GROUPED_MAP"></a>2、GROUPED_MAP</h3><p>&emsp;&emsp;就拿上面计算每个id下不同品牌的数量的例子来看：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">M</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f1</span>(<span class="hljs-params">self</span>):</span><br>        df = spark.createDataFrame(<br>            [(<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>), (<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>), (<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>), (<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>), (<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>),(<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>), (<span class="hljs-string">&#x27;a1&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>),<br>             (<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>), (<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>), (<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>), (<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>), (<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>),(<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;a&#x27;</span>), (<span class="hljs-string">&#x27;a2&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>)],<br>            [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;brand&quot;</span>])<br>        df.show()<br>        <span class="hljs-comment"># 设置返回类型，包括返回的列名，每列值的类型</span><br>        schema = T.StructType()<br>        schema.add(T.StructField(<span class="hljs-string">&quot;id&quot;</span>, T.StringType(), <span class="hljs-literal">True</span>))<br>        <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;d&quot;</span>]:<br>            schema.add(T.StructField(col, T.IntegerType(), <span class="hljs-literal">True</span>))<br>        <span class="hljs-built_in">print</span>(schema)<br>        <br>        <span class="hljs-comment"># 构建pandas_udf</span><br>        cnt_udf = F.pandas_udf(M.__t_map, schema, F.PandasUDFType.GROUPED_MAP)<br>        <span class="hljs-comment"># 引用udf，传入的相当于整个df，注意使用的是apply</span><br>        df1 = df.groupBy([<span class="hljs-string">&quot;id&quot;</span>]).apply(cnt_udf)<br>        df1.show()<br><br><span class="hljs-meta">    @staticmethod</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__t_map</span>(<span class="hljs-params">df</span>):</span><br>        res = &#123;<span class="hljs-string">&quot;id&quot;</span>: [], <span class="hljs-string">&quot;a&quot;</span>: [],  <span class="hljs-string">&quot;b&quot;</span>: [],  <span class="hljs-string">&quot;c&quot;</span>: [],  <span class="hljs-string">&quot;d&quot;</span>: []&#125;<br>        <span class="hljs-keyword">for</span> index, row <span class="hljs-keyword">in</span> df.iterrows():<br>            <span class="hljs-keyword">if</span> index &gt; <span class="hljs-number">0</span>:  <span class="hljs-comment"># 返回的df是groupby之后的，若没有此操作，则返回的df是和原df大小一致的</span><br>                <span class="hljs-keyword">break</span><br>            res[<span class="hljs-string">&quot;id&quot;</span>].append(row[<span class="hljs-string">&quot;id&quot;</span>])<br><br>        res[<span class="hljs-string">&quot;a&quot;</span>].append(df[df[<span class="hljs-string">&quot;brand&quot;</span>] == <span class="hljs-string">&#x27;a&#x27;</span>].shape[<span class="hljs-number">0</span>])<br>        res[<span class="hljs-string">&quot;b&quot;</span>].append(df[df[<span class="hljs-string">&quot;brand&quot;</span>] == <span class="hljs-string">&#x27;b&#x27;</span>].shape[<span class="hljs-number">0</span>])<br>        res[<span class="hljs-string">&quot;c&quot;</span>].append(df[df[<span class="hljs-string">&quot;brand&quot;</span>] == <span class="hljs-string">&#x27;c&#x27;</span>].shape[<span class="hljs-number">0</span>])<br>        res[<span class="hljs-string">&quot;d&quot;</span>].append(df[df[<span class="hljs-string">&quot;brand&quot;</span>] == <span class="hljs-string">&#x27;d&#x27;</span>].shape[<span class="hljs-number">0</span>])<br><br>        res_df = pd.DataFrame(res)<br>        <span class="hljs-keyword">return</span> res_df<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    m = M()<br>    <span class="hljs-comment"># m.f()</span><br>    m.f1()<br>    <br>--------------------------------------------------------------<br>输入<br>+---+-----+<br>| <span class="hljs-built_in">id</span>|brand|<br>+---+-----+<br>| a1|    a|<br>| a1|    b|<br>| a1|    c|<br>| a1|    a|<br>| a1|    d|<br>| a1|    a|<br>| a1|    d|<br>| a2|    c|<br>| a2|    b|<br>| a2|    c|<br>| a2|    b|<br>| a2|    d|<br>| a2|    a|<br>| a2|    c|<br>+---+-----+<br>--------------------------------------------------------------<br>输出<br>+---+---+---+---+---+<br>| <span class="hljs-built_in">id</span>|  a|  b|  c|  d|<br>+---+---+---+---+---+<br>| a1|  <span class="hljs-number">3</span>|  <span class="hljs-number">1</span>|  <span class="hljs-number">1</span>|  <span class="hljs-number">2</span>|<br>| a2|  <span class="hljs-number">1</span>|  <span class="hljs-number">2</span>|  <span class="hljs-number">3</span>|  <span class="hljs-number">1</span>|<br>+---+---+---+---+---+<br></code></pre></td></tr></table></figure>
-<h2 id="三总结">三、总结</h2>
-<p>  好了，这就是本篇文章对pyspark和pandas一起应用的一个例子，分别介绍了GROUP_AGG和GROUP_MAP两个场景，后续还需要再补充一个SCALAR_ITER的应用，希望能对您有用。</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>&emsp;&emsp;好了，这就是本篇文章对pyspark和pandas一起应用的一个例子，分别介绍了GROUP_AGG和GROUP_MAP两个场景，后续还需要再补充一个SCALAR_ITER的应用，希望能对您有用。</p>
 
             </div>
             <hr>
