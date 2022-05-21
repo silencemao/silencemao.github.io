@@ -40,6 +40,8 @@ def pandas_udf(
 
 ```
 
+
+
 pandas_udf就三个参数：
 
 - f：即用户自定义的func
@@ -57,11 +59,15 @@ pandas_udf就三个参数：
 
 &emsp;**&emsp;今天主要介绍一下GROUPED_MAP和GROUP_AGG的用法。**
 
+
+
 | 方法        | 输入       | 输出      | 配合使用方式 |      |      |
 | ----------- | ---------- | --------- | ------------ | ---- | ---- |
 | GROUPED_MAP | Datafram   | Dataframe | Apply        |      |      |
 | GROUPED_AGG | 一列或多列 | 常量      | agg          |      |      |
 |             |            |           |              |      |      |
+
+
 
 
 
