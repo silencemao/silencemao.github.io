@@ -46,14 +46,16 @@ pandas_udf就三个参数：
 
 - returnType：自定义的func返回的值类型
 
-- functionType：枚举值，包含下面四种方式，表示的是我们的函数是按照什么样的方式进行映射，即返回值和输入是怎样的映射关系
+- functionType：枚举值，包含下面四种方式，表示的是我们的函数是按照什么样的方式进行映射，即返回值和输入是怎样的映射关系:
 
-  - ```python
-    SCALAR: PandasScalarUDFType          ：标量，即返回一个值
-    SCALAR_ITER: PandasScalarIterUDFType ：迭代器，这个还需要我探索一下
-    GROUPED_MAP: PandasGroupedMapUDFType ：分组映射，分组之后返回df，可以和原df大小一致，也可不一致，用户自己可以控制
-    GROUPED_AGG: PandasGroupedAggUDFType ：分组聚合，分组之后返回一个常量值
-    ```
+  ```python
+  SCALAR: PandasScalarUDFType          ：标量，即返回一个值
+  SCALAR_ITER: PandasScalarIterUDFType ：迭代器，这个还需要我探索一下
+  GROUPED_MAP: PandasGroupedMapUDFType ：分组映射，分组之后返回df，可以和原df大小一致，也可不一致，用户自己可以控制
+  GROUPED_AGG: PandasGroupedAggUDFType ：分组聚合，分组之后返回一个常量值
+  ```
+
+
 
 &emsp;&emsp;今天主要介绍一下GROUPED_MAP和GROUP_AGG的用法。
 
@@ -67,7 +69,7 @@ pandas_udf就三个参数：
 
 ### 1、GROUPED_AGG
 
-&emsp;&emsp;就拿上面那个计算组内分位数的例子来做，首先按照
+&emsp;&emsp;就拿上面那个计算组内分位数的例子来做，
 
 ```python
 import findspark
