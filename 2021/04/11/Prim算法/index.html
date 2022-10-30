@@ -16,12 +16,12 @@
   <meta name="author" content="silence kxm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Prim算法   假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通。也称为最小生成树（最小支撑树），即保持&quot;连通性&quot;的前提下">
+    <meta name="description" content="Prim算法&amp;ensp;&amp;ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通。也称为最小生成树（最小支撑树），即保持">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Prim算法">
 <meta property="og:url" content="http://yoursite.com/2021/04/11/Prim%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="Prim算法   假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通。也称为最小生成树（最小支撑树），即保持&quot;连通性&quot;的前提下">
+<meta property="og:description" content="Prim算法&amp;ensp;&amp;ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通。也称为最小生成树（最小支撑树），即保持">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-11T08:17:50.000Z">
 <meta property="article:modified_time" content="2021-06-04T13:13:40.075Z">
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19 分钟
+      20 分钟
     </span>
   
 
@@ -238,23 +238,19 @@
             <h1 style="display: none">Prim算法</h1>
             
             <div class="markdown-body">
-              <h2 id="prim算法">Prim算法</h2>
-<p>  假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说<strong>我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通</strong>。也称为最小生成树（最小支撑树），即保持"连通性"的前提下的最小子图，子图各个边的权重之和最小。</p>
+              <h2 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h2><p>&ensp;&ensp;假定我们要给各个村子修路，将村子之间互相连通起来，但是呢又不想直在任意两两村子之间直接修，那样会浪费成本。因此我们可以考虑在部分村子之间修，只要保证这些路可以将所有的村子连通起来就好（即村A和村B之间没有直接连通，但是可以通过村C来中转，从A-C-B）。也就是说<strong>我们有N个村子，我们可以修N-1条路，来保证村之间可以有路连通</strong>。也称为最小生成树（最小支撑树），即保持”连通性”的前提下的最小子图，子图各个边的权重之和最小。</p>
 <span id="more"></span>
-<h2 id="解决方案">解决方案</h2>
-<h3 id="贪心法">贪心法</h3>
-<p>  我们设定无向图G=(P, E)为连通图，P为G中的所有顶点，E为顶点之间的边。我们要从中筛选出部分边构成最小生成树，使的边权重之和最小。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="贪心法"><a href="#贪心法" class="headerlink" title="贪心法"></a>贪心法</h3><p>&ensp;&ensp;我们设定无向图G=(P, E)为连通图，P为G中的所有顶点，E为顶点之间的边。我们要从中筛选出部分边构成最小生成树，使的边权重之和最小。</p>
 <p>我们定义V为已经修好路的顶点，U为还未进行修路的顶点，V中的顶点构成了最小生成树后的子树，U中的点会逐个进入V中，最终生成一个最小生成树。</p>
 <p>1、首先我们将第一个顶点放入V中，并将其从U中删除。</p>
-<p>2、从U中选择一个距离V最近的顶点<span class="math inline">\(u_k\)</span>，即从U中选择一个顶点，它距离V中所有点的最短距离，是U中的顶点的最小的。</p>
-<p>3、将<span class="math inline">\(u_k\)</span>从U中删除，加入V中。</p>
+<p>2、从U中选择一个距离V最近的顶点$u_k$，即从U中选择一个顶点，它距离V中所有点的最短距离，是U中的顶点的最小的。</p>
+<p>3、将$u_k$从U中删除，加入V中。</p>
 <p>4、以此类推，直到U中为空，即得到了最小生成树的权重。</p>
-<h2 id="代码逻辑">代码逻辑</h2>
-<p>  第一种写法，我们首先将第一个顶点加入V中，然后开始尝试m-1次，将剩下的顶点依次纳入V中。重点在于如何求U中距离V最近的顶点，我们这里直接两层循环，遍历U中顶点，计算其与V中所有顶点的最短距离，保存距离最短的U中的顶点的索引。遍历结束，索引对应的U中顶点加入到V中即可。时间复杂度为<span class="math inline">\(O(n^3)\)</span></p>
+<h2 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h2><p>&ensp;&ensp;第一种写法，我们首先将第一个顶点加入V中，然后开始尝试m-1次，将剩下的顶点依次纳入V中。重点在于如何求U中距离V最近的顶点，我们这里直接两层循环，遍历U中顶点，计算其与V中所有顶点的最短距离，保存距离最短的U中的顶点的索引。遍历结束，索引对应的U中顶点加入到V中即可。时间复杂度为$O(n^3)$</p>
 <figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">prim</span><span class="hljs-params">(matrix [][]<span class="hljs-keyword">int</span>)</span></span> &#123;<br>  m := <span class="hljs-built_in">len</span>(matrix)<br>  V := []<span class="hljs-keyword">int</span>&#123;<span class="hljs-number">0</span>&#125;<br>  <span class="hljs-keyword">var</span> U []<span class="hljs-keyword">int</span><br>  <span class="hljs-keyword">for</span> i := <span class="hljs-number">1</span>; i &lt; m; i++ &#123;<br>    U = <span class="hljs-built_in">append</span>(U, i)<br>  &#125;<br><br>  <span class="hljs-keyword">for</span> k := <span class="hljs-number">0</span>; k &lt; m<span class="hljs-number">-1</span>; k++ &#123;<br>    min := <span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">31</span> - <span class="hljs-number">1</span><br>    ind1, ind2 := <span class="hljs-number">-1</span>, <span class="hljs-number">-1</span><br><br>    <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> V &#123;<br>      <span class="hljs-keyword">for</span> j := <span class="hljs-keyword">range</span> U &#123;<br>        <span class="hljs-keyword">if</span> matrix[V[i]][U[j]] &lt; min &#123;<br>          min = matrix[V[i]][U[j]]<br>          ind1, ind2 = i, j<br>        &#125;<br>      &#125;<br>    &#125;<br>    fmt.Println(V[ind1], U[ind2], min)<br>    V = <span class="hljs-built_in">append</span>(V, U[ind2])<br>    U = <span class="hljs-built_in">append</span>(U[:ind2], U[ind2+<span class="hljs-number">1</span>:]...)<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>  matrix := [][]<span class="hljs-keyword">int</span>&#123;<br>    &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;,<br>    &#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">128</span>&#125;,<br>    &#123;<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>&#125;,<br>    &#123;<span class="hljs-number">3</span>, <span class="hljs-number">128</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>&#125;,<br>  &#125;<br>  prim(matrix)<br>  fmt.Println()<br>  prim1(matrix)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>  上面那种写法的时间复杂度比较高，我们可以考虑进行下优化。在找距离V最近的顶点时，是存在优化空间的。不需要每次都遍历V和U，我们可以用一个数组记录下U中顶点到V的最短距离。</p>
-<p>1、dis数组的长度为顶点的个数，当V中只有第一个顶点<span class="math inline">\(v_0\)</span>，dis中记录了该顶点与U中所有顶点的最近距离（无向图，a-&gt;b = b-&gt;a）。</p>
-<p>2、当V中新增一个顶点<span class="math inline">\(v_1\)</span>时，我们可以对dis进行一次更新。若U中存在顶点<span class="math inline">\(u_k\)</span>其距离<span class="math inline">\(v_1\)</span>的值小于其距离<span class="math inline">\(v_0\)</span>的值，我们就可以更新dis中的信息。</p>
+<p>&ensp;&ensp;上面那种写法的时间复杂度比较高，我们可以考虑进行下优化。在找距离V最近的顶点时，是存在优化空间的。不需要每次都遍历V和U，我们可以用一个数组记录下U中顶点到V的最短距离。</p>
+<p>1、dis数组的长度为顶点的个数，当V中只有第一个顶点$v_0$，dis中记录了该顶点与U中所有顶点的最近距离（无向图，a-&gt;b = b-&gt;a）。</p>
+<p>2、当V中新增一个顶点$v_1$时，我们可以对dis进行一次更新。若U中存在顶点$u_k$其距离$v_1$的值小于其距离$v_0$的值，我们就可以更新dis中的信息。</p>
 <p>3、直接根据dis中的距离来计算距离V最近顶点即可。</p>
 <p>代码如下：</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">prim1</span><span class="hljs-params">(matrix [][]<span class="hljs-keyword">int</span>)</span></span> &#123;<br>	m := <span class="hljs-built_in">len</span>(matrix)<br>	dis := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">int</span>, m)<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; m; i++ &#123;<br>		dis[i] = matrix[<span class="hljs-number">0</span>][i]<br>	&#125;<br>	status := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">int</span>]<span class="hljs-keyword">bool</span>, m)<br><br>	res := <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; m<span class="hljs-number">-1</span>; i++ &#123; <span class="hljs-comment">// 需要找剩余的点</span><br>		t := <span class="hljs-number">-1</span><br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">1</span>; j &lt; m; j++ &#123; <span class="hljs-comment">// 每次遍历剩余的所有点</span><br>			<span class="hljs-keyword">if</span> !status[j] &amp;&amp; (t == <span class="hljs-number">-1</span> || dis[t] &gt; dis[j]) &#123;<br>				t = j<br>			&#125;<br>		&#125;<br>		res += dis[t]<br>		fmt.Println(i, t, dis[t])<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">1</span>; j &lt; m; j++ &#123;<br>			<span class="hljs-keyword">if</span> matrix[t][j] &lt; dis[j] &#123;<br>				dis[j] = matrix[t][j]<br>			&#125;<br>		&#125;<br>		status[t] = <span class="hljs-literal">true</span><br>	&#125;<br>	fmt.Println(res)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	matrix := [][]<span class="hljs-keyword">int</span>&#123;<br>		&#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>&#125;,<br>		&#123;<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">128</span>&#125;,<br>		&#123;<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">4</span>&#125;,<br>		&#123;<span class="hljs-number">3</span>, <span class="hljs-number">128</span>, <span class="hljs-number">4</span>, <span class="hljs-number">0</span>&#125;,<br>	&#125;<br>	prim(matrix)<br>	fmt.Println()<br>	prim1(matrix)<br>&#125;<br><br></code></pre></td></tr></table></figure>
@@ -479,7 +475,24 @@
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  <!--MathJax.Hub.Config({{ JSON.stringify(config) }});-->
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>
