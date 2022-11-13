@@ -16,12 +16,12 @@
   <meta name="author" content="silence kxm">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Floyd 算法&amp;ensp;&amp;ensp;Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。">
+    <meta name="description" content="Floyd 算法   Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Floyd算法">
 <meta property="og:url" content="http://yoursite.com/2021/04/11/Floyd%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="碎月如歌">
-<meta property="og:description" content="Floyd 算法&amp;ensp;&amp;ensp;Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。">
+<meta property="og:description" content="Floyd 算法   Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-04-11T02:54:52.000Z">
 <meta property="article:modified_time" content="2021-06-04T13:13:40.074Z">
@@ -197,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.2k 字
     </span>
   
 
@@ -206,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20 分钟
+      19 分钟
     </span>
   
 
@@ -238,17 +238,21 @@
             <h1 style="display: none">Floyd算法</h1>
             
             <div class="markdown-body">
-              <h2 id="Floyd-算法"><a href="#Floyd-算法" class="headerlink" title="Floyd 算法"></a>Floyd 算法</h2><p>&ensp;&ensp;Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。</p>
+              <h2 id="floyd-算法">Floyd 算法</h2>
+<p>  Floyd算法也是求最短路径的一种算法，主要用于计算两两节点之间最短的距离。不像dijstra是固定一个起点，在Floyd中每一个点都可以是起点，用来计算它到其它节点之间的最短距离。其实Floyd就像是执行了n次dijstra算法。</p>
 <span id="more"></span>
-<h2 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h2><p>&ensp;&ensp;给定一个带权重的图G=(V,E)，可以存在负权(但不能存在负权环路)。V代表顶点的集合，E代表顶点之间的权重。</p>
+<h2 id="算法描述">算法描述</h2>
+<p>  给定一个带权重的图G=(V,E)，可以存在负权(但不能存在负权环路)。V代表顶点的集合，E代表顶点之间的权重。</p>
 <p>我们要计算任意两个顶点之间最短距离。</p>
 <p>1、<strong>例如：AB两个顶点之间的最短距离不一定是A直接到B的距离，有可能是A经过C之后再去B得到的最短距离</strong>。</p>
 <p>2、我们可以称C为AB的媒介，那怎样去找这些媒介呢？</p>
 <p>3、<strong>遍历</strong>，没错就是遍历其它点，若存在一个媒介可以是Dis(A, C) + Dis(C, B) &lt; Dis(A, B)，则我们就可以更新Dis(A, B)=Dis(A, C) + Dis(C, B)。最终遍历完一遍，我们就能知道AB之间的最短距离了。</p>
 <p>4、因此，<strong>我们在计算的过程中可以不断的更新两个点之间的最短距离</strong>。</p>
-<h2 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h2><p>&ensp;&ensp;&ensp;代码很好理解，就是<strong>三重循环</strong>，最外层表示媒介，里面两层表示两个端点。同时我们用tPath这个变量记录任意两点之间最短距离经过的路径，若两点之间不存在媒介，则$tPath[i][j]=-1$，表示二者之间直接连接就是最短路径。</p>
+<h2 id="代码逻辑">代码逻辑</h2>
+<p>   代码很好理解，就是<strong>三重循环</strong>，最外层表示媒介，里面两层表示两个端点。同时我们用tPath这个变量记录任意两点之间最短距离经过的路径，若两点之间不存在媒介，则<span class="math inline">\(tPath[i][j]=-1\)</span>，表示二者之间直接连接就是最短路径。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></div></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;strconv&quot;</span><br>)<br><br><span class="hljs-comment">//https://juejin.im/post/5cc79c93f265da035b61a42e</span><br><br><span class="hljs-keyword">type</span> Floyd <span class="hljs-keyword">struct</span> &#123;<br>	tTwoPointDis [][]<span class="hljs-keyword">int</span><br>	tPath        [][]<span class="hljs-keyword">int</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *Floyd)</span> <span class="hljs-title">Init</span><span class="hljs-params">(tDis [][]<span class="hljs-keyword">int</span>)</span></span> &#123;<br>	f.tTwoPointDis = tDis<br><br>	r := <span class="hljs-built_in">len</span>(tDis)<br><br>	f.tPath = <span class="hljs-built_in">make</span>([][]<span class="hljs-keyword">int</span>, r)<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> f.tPath &#123;<br>		f.tPath[i] = <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">int</span>, r)<br>	&#125;<br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; r; i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; r; j++ &#123;<br>			f.tPath[i][j] = <span class="hljs-number">-1</span><br>		&#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *Floyd)</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span></span> &#123;<br>	fmt.Println(<span class="hljs-string">&quot;before&quot;</span>)<br>	<span class="hljs-keyword">for</span> _, tNums := <span class="hljs-keyword">range</span> f.tTwoPointDis &#123;<br>		<span class="hljs-keyword">for</span> _, tNum := <span class="hljs-keyword">range</span> tNums &#123;<br>			fmt.Print(tNum, <span class="hljs-string">&quot; &quot;</span>)<br>		&#125;<br>		fmt.Println()<br>	&#125;<br>	r := <span class="hljs-built_in">len</span>(f.tTwoPointDis)<br>	<span class="hljs-keyword">for</span> k := <span class="hljs-number">0</span>; k &lt; r; k++ &#123; <span class="hljs-comment">// 媒介</span><br>		<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; r; i++ &#123;<br>			<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; r; j++ &#123;<br>				<span class="hljs-keyword">if</span> f.tTwoPointDis[i][j] &gt; (f.tTwoPointDis[i][k] + f.tTwoPointDis[k][j]) &#123;<br>					f.tPath[i][j] = k <span class="hljs-comment">// 记录媒介</span><br>					f.tTwoPointDis[i][j] = f.tTwoPointDis[i][k] + f.tTwoPointDis[k][j]<br>				&#125;<br>			&#125;<br>		&#125;<br>	&#125;<br>	fmt.Println(<span class="hljs-string">&quot;after&quot;</span>)<br>	<span class="hljs-keyword">for</span> _, tNums := <span class="hljs-keyword">range</span> f.tTwoPointDis &#123;<br>		<span class="hljs-keyword">for</span> _, tNum := <span class="hljs-keyword">range</span> tNums &#123;<br>			fmt.Print(tNum, <span class="hljs-string">&quot; &quot;</span>)<br>		&#125;<br>		fmt.Println()<br>	&#125;<br><br>	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; r; i++ &#123;<br>		<span class="hljs-keyword">for</span> j := <span class="hljs-number">0</span>; j &lt; r; j++ &#123;<br>			<span class="hljs-keyword">if</span> i != j &#123;<br>				fmt.Println(f.getPath(i, j))<br>			&#125;<br>		&#125;<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(f *Floyd)</span> <span class="hljs-title">getPath</span><span class="hljs-params">(i, j <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">string</span></span> &#123; <span class="hljs-comment">// 打印路径</span><br>	<span class="hljs-keyword">if</span> f.tPath[i][j] == <span class="hljs-number">-1</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot; &quot;</span> + strconv.Itoa(i) + <span class="hljs-string">&quot; &quot;</span> + strconv.Itoa(j)<br>	&#125; <span class="hljs-keyword">else</span> &#123;<br>		k := f.tPath[i][j]<br>		<span class="hljs-keyword">return</span> f.getPath(i, k) + f.getPath(k, j)<br>	&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	tDis := [][]<span class="hljs-keyword">int</span>&#123;<br>		&#123;<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">4</span>&#125;,<br>		&#123;<span class="hljs-number">127</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">127</span>&#125;,<br>		&#123;<span class="hljs-number">7</span>, <span class="hljs-number">127</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>&#125;,<br>		&#123;<span class="hljs-number">5</span>, <span class="hljs-number">127</span>, <span class="hljs-number">12</span>, <span class="hljs-number">0</span>&#125;&#125;<br><br>	f := <span class="hljs-built_in">new</span>(Floyd)<br>	f.Init(tDis)<br>	f.solve()<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>&ensp;&ensp;ok，这就是floyd算法，我们不能被它的名字给吓住了。其实就是利用三重循环，计算图中任意两点的最短距离。</p>
+<h2 id="结语">结语</h2>
+<p>  ok，这就是floyd算法，我们不能被它的名字给吓住了。其实就是利用三重循环，计算图中任意两点的最短距离。</p>
 
             </div>
             <hr>
@@ -477,24 +481,7 @@
 
 
 <!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  <!--MathJax.Hub.Config({{ JSON.stringify(config) }});-->
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="{{ src }}">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+<script  src="/js/boot.js" ></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 </body>
