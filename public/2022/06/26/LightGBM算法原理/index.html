@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://yoursite.com/images/lgb_alg2_goss.png">
 <meta property="og:image" content="http://yoursite.com/images/lgb_alg3_efb.png">
 <meta property="article:published_time" content="2022-06-26T02:21:02.000Z">
-<meta property="article:modified_time" content="2022-06-26T10:48:18.585Z">
+<meta property="article:modified_time" content="2022-12-07T13:16:10.926Z">
 <meta property="article:author" content="silence kxm">
 <meta property="article:tag" content="树模型">
 <meta name="twitter:card" content="summary_large_image">
@@ -201,7 +201,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.9k 字
+      4k 字
     </span>
   
 
@@ -210,7 +210,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25 分钟
+      34 分钟
     </span>
   
 
@@ -291,6 +291,15 @@
 <p>上面解决了如何判断哪些特征要被绑定在一起，那么EFB算法如何绑定特征呢？如何既减少了特征维度，又保证原始的特征值可以在特征包中被识别出来呢？由于LightGBM是采用直方图算法减少对于寻找最佳分裂点的算法复杂度，直方图算法将特征值离散到若干个bin中。这里EFB算法为了保留特征，将bundle内不同的特征加上一个偏移常量，使不同特征的值分布到bundle的不同bin内。例如：特征A的取值范围为[0,10)，特征B的原始取值范围为[0，20)，对特征B的取值上加一个偏置常量10，将其取值范围变为[10,30)，这样就可以将特征A和B绑定在一起了。具体的算法流程上图Algorithm4所示。</p>
 <h3 id="五按叶子生长leaf-wise">五、按叶子生长（leaf-wise）</h3>
 <p>在xgb中，决策树的构建是按照层生长的。每次都是把一层的节点都进行分裂，这种操作复杂度会高，而且一层中未必所有节点都有很高的收益。所以在LightGBM中是按照叶子节点生长的，每次选择所有叶子节点中收益最大的那个节点进行分裂，依次循环下去。和xgb相比，优点是lgb减少了一部分收益较小的节点分裂开销，生成的树较深，更容易降低误差，缺点是树较深，有可能会过拟合，所以lgb有一个控制树的深度的参数，防止过拟合。</p>
+<h3 id="六并行优化">六、并行优化</h3>
+<p>Feature Parallel 特征并行算法目的是在决策树生成过程中的每次迭代，高效地找到最优特征分裂点。特征并行的主要思想是在不同机器在不同的特征集合上分别寻找最优的分割点，然后在机器间同步最优的分割点。</p>
+<p>传统的特征并行算法</p>
+<p>根据不同的特征子集，将数据集进行垂直切分。（不同机器worker有不同的特征子集） 每个worker寻找局部的最优分裂特征以及分裂点。 不同worker之间进行网络传输，交换最优分裂信息，最终得到最优的分裂信息。 具有最优分裂特征的worker，局部进行分裂，并将分裂结果广播到其他worker。 其他worker根据接收到的数据进行切分数据。 该方法不能有效地加速特征选择的效率，当数据量#data很大时，该并行方法不能加快效率。并且，最优的分裂结果需要在worker之间进行传输，需要消耗很多的传输资源以及传输时间。</p>
+<p>LightGBM的特征并行算法 LightGBM并没有垂直的切分数据集，而是每个worker都有全量的训练数据，因此最优的特征分裂结果不需要传输到其他worker中，只需要将最优特征以及分裂点告诉其他worker，worker随后本地自己进行处理。处理过程如下：</p>
+<p>每个worker在基于局部的特征集合找到最优分裂特征。 workder间传输最优分裂信息，并得到全局最优分裂信息。 每个worker基于全局最优分裂信息，在本地进行数据分裂，生成决策树。 然而，当数据量很大时，特征并行算法还是受限于特征分裂效率。因此，当数据量大时，推荐使用数据并行算法。</p>
+<p>Data Parallel 传统的数据并行算法</p>
+<p>水平切分数据集。 每个worker基于数据集构建局部特征直方图（Histogram）。 归并所有局部的特征直方图，得到全局直方图。 找到最优分裂信息，进行数据分裂。 缺点：网络传输代价比较大，如果使用point-to-point的传输算法，每个worker的传输代价为<span class="math inline">\(O(#machine * #feature * #bin)\)</span>. 如果使用All Reduce并行算子，传输代价为<span class="math inline">\(O(2* #feature * #bin)\)</span>.</p>
+<p>LightGBM的数据并行算法 LightGBM算法使用Reduce Scatter并行算子归并来自不同worker的不同特征子集的直方图，然后在局部归并的直方图中找到最优局部分裂信息，最终同步找到最优的分裂信息。 除此之外，LightGBM使用直方图减法加快训练速度。我们只需要对其中一个子节点进行数据传输，另一个子节点可以通过histogram subtraction得到。 LightGBM可以将传输代价降低为<span class="math inline">\(O(0.5 * #feature * #bin)\)</span>。</p>
 <h3 id="六总结">六、总结</h3>
 <p>lgb效率更高主要得益于它的几个优化点，</p>
 <ol type="1">
